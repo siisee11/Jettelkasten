@@ -16,7 +16,7 @@
     "docs": "npx quartz build --serve -d docs",
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
-    "copy": "node scripts/copy-notes.js '/Users/siisee11/Library/Mobile Documents/iCloud~md~obsidian/Documents/iColudVault'",
+    "copy": "node scripts/copy-notes.js '/Users/jay/Library/Mobile Documents/iCloud~md~obsidian/Documents/iColudVault'",
     "test": "tsx ./quartz/util/path.test.ts && tsx ./quartz/depgraph.test.ts",
     "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"
   },
