@@ -1,23 +1,40 @@
 @use "./base.scss";
 
-/* Clean mode tweaks */
+/* Patrick Collison–style minimal */
 .page {
-  max-width: 960px;
+  max-width: 720px;
+  padding: 0 24px;
 }
 
 .article-title {
-  margin-bottom: 1.5rem;
+  margin: 2.5rem 0 1.5rem 0;
+  font-weight: 600;
 }
 
-/* Reduce visual noise in list pages */
+article p {
+  line-height: 1.8;
+}
+
+/* simplify lists */
 .section-ul {
   padding-left: 0;
 }
 
 .section-li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-.section .tags {
+.section .tags,
+.content-meta,
+.tag-list,
+.graph,
+.backlinks,
+.table-of-contents {
   display: none;
+}
+
+/* reduce header/footers */
+footer {
+  margin-top: 3rem;
+  color: var(--gray);
 }
