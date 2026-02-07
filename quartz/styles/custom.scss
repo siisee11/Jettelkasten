@@ -1,3 +1,23 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+/* Clean mode tweaks */
+.page {
+  max-width: 960px;
+}
+
+.article-title {
+  margin-bottom: 1.5rem;
+}
+
+/* Reduce visual noise in list pages */
+.section-ul {
+  padding-left: 0;
+}
+
+.section-li {
+  margin-bottom: 0.5rem;
+}
+
+.section .tags {
+  display: none;
+}
