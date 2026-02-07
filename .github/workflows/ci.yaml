@@ -34,5 +34,8 @@ jobs:
 
       - run: npm ci
 
+      - name: Typecheck
+        run: npm run typecheck
+
       - name: Ensure Quartz builds, check bundle info
         run: npx quartz build --bundleInfo -d docs
