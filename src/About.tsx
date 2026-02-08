@@ -3,6 +3,9 @@ import React from "react";
 export default function About() {
   return (
     <div className="page">
+      <div className="top-nav">
+        <a href="/">home/</a>
+      </div>
       <h1>About</h1>
       <p>I live in Suwon, South Korea, and I'm a co-founder of Wordbricks.</p>
       <p>Email: siisee111@gmail.com.</p>

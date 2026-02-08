@@ -120,6 +120,9 @@ const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   );
   return (
     <div className="page home">
+      <div className="top-nav">
+        <Link to="/">home/</Link>
+      </div>
       <div className="home-inner">
         <h1>Posts</h1>
         <div className="home-links">
@@ -138,6 +141,9 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   const list = pages.filter((p) => p.tags.includes("keyword"));
   return (
     <div className="page home">
+      <div className="top-nav">
+        <Link to="/">home/</Link>
+      </div>
       <div className="home-inner">
         <h1>Keywords</h1>
         <div className="home-links">
