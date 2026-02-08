@@ -1,6 +1,7 @@
 ---
 tags:
   - public
+  - keyword
 aliases:
   - 책
 ---
@@ -13,3 +14,4 @@ aliases:
 [[No rules rules]]
 [[Bill Campbell|빌 캠벨]]
 [[Hook]]
+[[마인드셋]]
