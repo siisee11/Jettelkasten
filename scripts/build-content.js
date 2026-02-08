@@ -12,6 +12,7 @@ const outDir = path.resolve("public/data");
 const slugifySegment = (seg) =>
   seg
     .trim()
+    .toLowerCase()
     .replace(/\s+/g, "-")
     .replace(/[^\p{L}\p{N}\-_.]/gu, "");
 

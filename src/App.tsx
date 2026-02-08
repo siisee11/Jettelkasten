@@ -35,6 +35,19 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages }) => {
   );
 };
 
+const Home: React.FC = () => {
+  return (
+    <div className="page">
+      <h1>Jtelkasten</h1>
+      <ul>
+        <li>
+          <Link to="/list">posts/</Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   const list = pages.filter((p) => p.slug !== "index");
   return (
@@ -58,7 +71,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<IndexList pages={pages} />} />
+      <Route path="/" element={<Home />} />
       <Route path="/list" element={<IndexList pages={pages} />} />
       <Route path="/*" element={<PageView pages={pages} />} />
     </Routes>
