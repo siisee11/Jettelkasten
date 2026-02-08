@@ -49,7 +49,7 @@ const Home: React.FC = () => {
 };
 
 const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
-  const list = pages.filter((p) => p.slug !== "index");
+  const list = pages.filter((p) => p.slug !== "index" && !p.tags.includes("keyword"));
   return (
     <div className="page home">
       <div className="home-inner">
