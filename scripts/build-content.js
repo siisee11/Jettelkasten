@@ -19,6 +19,9 @@ const slugifySegment = (seg) =>
 const slugifyPath = (p) => {
   const noExt = p.replace(/\.md$/i, "");
   const parts = noExt.split(path.sep).map(slugifySegment);
+  if (parts[0] === "fleeting" || parts[0] === "permanent") {
+    parts[0] = "p";
+  }
   return parts.join("/");
 };
 
