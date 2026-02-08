@@ -104,6 +104,7 @@ const Home: React.FC = () => {
         <div className="home-links">
           <Link to="/list">posts/</Link>
           <Link to="/about">about/</Link>
+          <Link to="/keywords">keywords/</Link>
         </div>
       </div>
     </div>
