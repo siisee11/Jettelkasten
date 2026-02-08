@@ -12,7 +12,7 @@ body {
 .page {
   max-width: 1500px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 32px 24px 32px 224px;
 }
 
 .page.home {
