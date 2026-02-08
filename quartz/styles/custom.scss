@@ -43,24 +43,32 @@ article p {
 
 body {
   font-family: var(--body-font);
-  font-size: 18px;
+  font-size: 8pt;
 }
 
 h1 {
-  font-size: 2.1rem;
+  font-size: 1.4rem;
 }
 
 h2 {
-  font-size: 1.6rem;
+  font-size: 1.15rem;
 }
 
 h3 {
-  font-size: 1.25rem;
+  font-size: 1.05rem;
 }
 
 code, pre {
   font-family: var(--mono-font);
-  font-size: 0.95em;
+  font-size: 0.9em;
+}
+
+small {
+  font-size: 0.85em;
+}
+
+li, p {
+  font-size: 1em;
 }
 
 /* simplify lists */
