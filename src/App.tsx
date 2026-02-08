@@ -130,6 +130,24 @@ const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   );
 };
 
+const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
+  const list = pages.filter((p) => p.tags.includes("keyword"));
+  return (
+    <div className="page home">
+      <div className="home-inner">
+        <h1>Keywords</h1>
+        <div className="home-links">
+          {list.map((p) => (
+            <div key={p.slug}>
+              <Link to={`/${p.slug}`}>{p.title}</Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const { pages, graph } = useData();
 
@@ -140,6 +158,7 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/list" element={<IndexList pages={pages} />} />
+      <Route path="/keywords" element={<KeywordList pages={pages} />} />
       <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
