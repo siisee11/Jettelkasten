@@ -1,5 +1,5 @@
 ---
-title: "\bJtelkasten"
+title: "Jtelkasten"
 tags:
   - public
 ---
