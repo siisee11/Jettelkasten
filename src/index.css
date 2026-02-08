@@ -19,6 +19,12 @@ body {
   max-width: 1500px;
 }
 
+@media (max-width: 768px) {
+  .page {
+    padding-left: 24px;
+  }
+}
+
 .home {
   display: flex;
   justify-content: flex-end;
