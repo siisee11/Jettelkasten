@@ -8,6 +8,7 @@ type Page = {
   title: string;
   bodyHtml: string;
   tags: string[];
+  aliases: string[];
   date: string | null;
   linksOut: string[];
 };
@@ -67,6 +68,9 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
   return (
     <div className="page">
       <h1>{page.title}</h1>
+      {page.aliases?.length > 0 && (
+        <div className="aliases">Aliases: {page.aliases.join(", ")}</div>
+      )}
       <div className="content" dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
       {page.tags.includes("keyword") && localGraph.nodes.length > 1 && (
         <div className="graph">

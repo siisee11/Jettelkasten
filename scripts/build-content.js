@@ -70,7 +70,9 @@ const main = async () => {
     const rel = path.relative(contentDir, file);
 
     const aliases = Array.isArray(data.aliases) ? data.aliases : [];
-    const englishAlias = aliases.find((a) => typeof a === "string" && /^[A-Za-z0-9 _.-]+$/.test(a));
+    const englishAlias = aliases.find(
+      (a) => typeof a === "string" && /^[A-Za-z0-9 _.-]+$/.test(a),
+    );
     const slugBase = englishAlias ? englishAlias : rel;
     const slug = slugifyPath(slugBase);
 
@@ -80,7 +82,7 @@ const main = async () => {
     const linksOut = parseLinks(raw);
     const bodyHtml = await toHtml(normalized);
 
-    pages.push({ slug, title, tags, date, linksOut, bodyHtml });
+    pages.push({ slug, title, tags, aliases, date, linksOut, bodyHtml });
   }
 
   const bySlug = new Map(pages.map((p) => [p.slug, p]));

@@ -46,6 +46,12 @@ h1 {
   line-height: 1.7;
 }
 
+.aliases {
+  font-size: 0.9em;
+  color: #666;
+  margin: 4px 0 12px 0;
+}
+
 .graph {
   margin-top: 2rem;
 }
