@@ -121,11 +121,11 @@ const Home: React.FC<{ pages: Page[] }> = ({ pages }) => {
           <Link to="/posts">posts/</Link>
           <Link to="/keywords">keywords/</Link>
         </div>
-        <div className="home-links">
+        <div className="home-links" style={{ marginTop: 8 }}>
           {categoryPages.map((p) => (
-            <div key={p.slug}>
-              <Link to={`/${p.slug}`}>{p.slug}</Link>
-            </div>
+            <Link key={p.slug} to={`/${p.slug}`}>
+              {p.slug.replace(/^p\//, "")}
+            </Link>
           ))}
         </div>
       </div>
