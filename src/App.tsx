@@ -56,14 +56,14 @@ const buildLocalGraph = (graph: Graph, center: string, hops = 2) => {
 const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) => {
   const params = useParams();
   const slug = params["*"] || "index";
-  const page = pages.find((p) => p.slug === slug) ?? pages.find((p) => p.slug === "index");
+  const page = pages.find((p) => p.slug === slug);
 
   const localGraph = useMemo(() => {
     if (!page) return { nodes: [], links: [] };
     return buildLocalGraph(graph, page.slug, 2);
   }, [graph, page]);
 
-  if (!page) return <div>Not found</div>;
+  if (!page) return <div className="page">Not found</div>;
 
   return (
     <div className="page">
@@ -87,6 +87,13 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
     </div>
   );
 };
+
+const NotFound: React.FC = () => (
+  <div className="page">
+    <h1>404</h1>
+    <p>Not found</p>
+  </div>
+);
 
 const Home: React.FC = () => {
   return (
@@ -131,6 +138,7 @@ export default function App() {
       <Route path="/about" element={<About />} />
       <Route path="/list" element={<IndexList pages={pages} />} />
       <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
