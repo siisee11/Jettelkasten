@@ -51,15 +51,17 @@ const Home: React.FC = () => {
 const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   const list = pages.filter((p) => p.slug !== "index");
   return (
-    <div className="page">
-      <h1>Posts</h1>
-      <ul>
-        {list.map((p) => (
-          <li key={p.slug}>
-            <Link to={`/${p.slug}`}>{p.title}</Link>
-          </li>
-        ))}
-      </ul>
+    <div className="page home">
+      <div className="home-inner">
+        <h1>Posts</h1>
+        <div className="home-links">
+          {list.map((p) => (
+            <div key={p.slug}>
+              <Link to={`/${p.slug}`}>{p.title}</Link>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
