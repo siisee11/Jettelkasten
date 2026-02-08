@@ -78,7 +78,7 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
         <div className="aliases">Tags: {page.tags.filter((t) => t !== "public").join(", ")}</div>
       )}
       <div className="content" dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
-      {(page.tags.includes("keyword") || page.tags.includes("person")) &&
+      {(page.tags.includes("keyword") || page.tags.includes("person") || page.tags.includes("category")) &&
         localGraph.nodes.length > 1 && (
         <div className="graph">
           <ForceGraph2D
@@ -89,6 +89,17 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
             width={720}
             height={360}
           />
+        </div>
+      )}
+      {page.tags.includes("category") && localGraph.nodes.length > 1 && (
+        <div className="home-links">
+          {localGraph.nodes
+            .filter((n) => n.id !== page.slug)
+            .map((n) => (
+              <Link key={n.id} to={`/${n.slug || n.id}`}>
+                {n.title || n.id}
+              </Link>
+            ))}
         </div>
       )}
     </div>
