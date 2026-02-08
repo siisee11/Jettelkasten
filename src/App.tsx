@@ -37,13 +37,13 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages }) => {
 
 const Home: React.FC = () => {
   return (
-    <div className="page">
-      <h1>Jtelkasten</h1>
-      <ul>
-        <li>
+    <div className="page home">
+      <div className="home-inner">
+        <h1>Jtelkasten</h1>
+        <div className="home-links">
           <Link to="/list">posts/</Link>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 };
