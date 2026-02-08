@@ -25,12 +25,15 @@ body {
   text-align: right;
 }
 
-.home-links a {
-  display: inline-block;
-  margin-left: 12px;
+.home-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
 }
 
-.home-links a:first-child {
+.home-links a {
+  display: inline-block;
   margin-left: 0;
 }
 
