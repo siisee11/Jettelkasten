@@ -2,21 +2,21 @@
 tags:
   - public
 ---
-[[Brian Armstrong]] [[../Permanent/Product Manager]]
+[[Brian Armstrong]] [[Product Manager]]
 
 브라이언 암스트롱이 생각하는 프로젝트 메니져
 
 ### 고객을 이해하는 사람
-[[../Permanent/user]]
+[[user]]
 
 ### 지표 기준으로 생각
-[[../Permanent/metric]]
+[[metric]]
 
 ### 우선순위를 항상 고민
-[[Permanent/priority]]
+[[priority]]
 
 ### 커뮤니케이션 허브 (외부와)
-[[Permanent/community]] 
+[[co]]
 
 
 

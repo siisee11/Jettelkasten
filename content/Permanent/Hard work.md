@@ -1,4 +1,5 @@
 ---
 tags:
   - public
+  - keyword
 ---

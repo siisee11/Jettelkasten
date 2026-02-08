@@ -2,7 +2,6 @@
 tags:
   - public
 ---
-
 [참고](https://mixpanel.com/ko/blog/aarrr-pirate-metrics/)
 
 ## AARRR [[metric]]

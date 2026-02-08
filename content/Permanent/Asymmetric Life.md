@@ -11,7 +11,7 @@ https://youtu.be/NG8UPFr2FEo
 비대칭적인 삶을 사는법
 
 ### Do hard thing
-[[../Permanent/Hard work]]  
+[[Hard work]]
 
 실패의 가장 큰 지분은 두려움
 

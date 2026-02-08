@@ -2,9 +2,9 @@
 tags:
   - public
 ---
-[[../Permanent/chatgpt]]
-[[../Permanent/thought]]
-[[../Permanent/Future]]
+[[chatgpt]]
+[[thought]]
+[[Future]]
 
 ChatGPT plugins
 
@@ -14,7 +14,7 @@ ChatGPT plugins
 
 플러그인은 무료 플러그인과 유료 플러그인이 있을 것. 물건을 주문하거나 플러그인 개발사의 유료 서비스를 이용하는 경우에, OpenAI의 결제모듈이 불리면서 결제할거냐 물어보겠지. 그 결제 금액의 30퍼센트는 OpenAI가 수수료로 챙김. 스트라이프가 중간에 낀다면 그 중 몇퍼를 가져감.
 
-ChatGPT앱은 이미 만들고 있을 것이고 아마 다음(4월 중)에 발표할 것임. 플러그인들은 이미 올라가있으니 ChatGPT앱 하나로 슈퍼앱이 될 가능성이 큼. [[../Permanent/Habit-forming-product]] 습관화 시키는 제품의 중요한 요소 [[../Permanent/How to build habit forming product]] Trigger, Action, Reward, Investment 모두 이미 있음.
+ChatGPT앱은 이미 만들고 있을 것이고 아마 다음(4월 중)에 발표할 것임. 플러그인들은 이미 올라가있으니 ChatGPT앱 하나로 슈퍼앱이 될 가능성이 큼. [[Habit-forming-product]] 습관화 시키는 제품의 중요한 요소 [[How to build habit forming product]] Trigger, Action, Reward, Investment 모두 이미 있음.
 
 앱의 가장 큰 문제는 수수료 정책인데, 애플과 구글이 30퍼를 받겠다고 한다면 OpenAI가 돈 벌 수단이 없으니 안올리거나 플러그인 제공업체한테 더 받을 듯. 근데 ChatGPT 규모면 한 곳이 30퍼의 벽을 열어주면 둘 다 열릴 수 밖에 없을듯.
 
