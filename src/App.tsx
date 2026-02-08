@@ -67,6 +67,9 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
 
   return (
     <div className="page">
+      <div className="top-nav">
+        <Link to="/">home/</Link>
+      </div>
       <h1>{page.title}</h1>
       {page.aliases?.length > 0 && (
         <div className="aliases">Aliases: {page.aliases.join(", ")}</div>
