@@ -68,7 +68,12 @@ const main = async () => {
     const { data, content } = matter(raw);
     const normalized = convertWikilinks(content);
     const rel = path.relative(contentDir, file);
-    const slug = slugifyPath(rel);
+
+    const aliases = Array.isArray(data.aliases) ? data.aliases : [];
+    const englishAlias = aliases.find((a) => typeof a === "string" && /^[A-Za-z0-9 _.-]+$/.test(a));
+    const slugBase = englishAlias ? englishAlias : rel;
+    const slug = slugifyPath(slugBase);
+
     const title = data.title ?? path.basename(rel, ".md");
     const tags = Array.isArray(data.tags) ? data.tags : [];
     const date = data.date ?? null;
