@@ -119,7 +119,6 @@ const Home: React.FC = () => {
           <Link to="/posts">posts/</Link>
           <Link to="/about">about/</Link>
           <Link to="/keywords">keywords/</Link>
-          <Link to="/categories">categories/</Link>
         </div>
       </div>
     </div>
@@ -170,27 +169,6 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   );
 };
 
-const CategoryList: React.FC<{ pages: Page[] }> = ({ pages }) => {
-  const list = pages.filter((p) => p.tags.includes("category"));
-  return (
-    <div className="page home">
-      <div className="top-nav">
-        <Link to="/">home/</Link>
-      </div>
-      <div className="home-inner">
-        <h1>Categories</h1>
-        <div className="home-links">
-          {list.map((p) => (
-            <div key={p.slug}>
-              <Link to={`/${p.slug}`}>{p.title}</Link>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export default function App() {
   const { pages, graph } = useData();
 
@@ -202,7 +180,6 @@ export default function App() {
       <Route path="/about" element={<About />} />
       <Route path="/posts" element={<IndexList pages={pages} />} />
       <Route path="/keywords" element={<KeywordList pages={pages} />} />
-      <Route path="/categories" element={<CategoryList pages={pages} />} />
       <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
