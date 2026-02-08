@@ -1,7 +1,6 @@
 ---
+aliases: 삶
 tags:
   - public
   - keyword
-aliases:
-  - 유저 인터뷰
 ---

@@ -1,7 +1,6 @@
 ---
+aliases: 킬러
 tags:
   - public
   - keyword
-aliases:
-  - 유저 인터뷰
 ---

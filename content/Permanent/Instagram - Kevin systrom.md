@@ -2,7 +2,6 @@
 tags:
   - public
 ---
+[[CEO Interviews]] [[Connecting dots]] [[quote]]
 
-[[../Permanent/CEO Interviews]] [[../Permanent/Connecting dots]] [[quote]]
-
-### You don’t have to be the best. But you have to be dangerous.
+"You don’t have to be the best. But you have to be dangerous."
