@@ -27,10 +27,11 @@ body {
 
 .home-links a {
   display: inline-block;
+  margin-left: 12px;
 }
 
-.home-links > div {
-  margin: 4px 0;
+.home-links a:first-child {
+  margin-left: 0;
 }
 
 h1 {

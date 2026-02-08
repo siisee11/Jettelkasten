@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Route, Routes, useParams, Link } from "react-router-dom";
+import About from "./About";
 import ForceGraph2D from "react-force-graph-2d";
 
 type Page = {
@@ -90,6 +91,7 @@ const Home: React.FC = () => {
         <h1>Jtelkasten</h1>
         <div className="home-links">
           <Link to="/list">posts/</Link>
+          <Link to="/about">about/</Link>
         </div>
       </div>
     </div>
@@ -122,6 +124,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
       <Route path="/list" element={<IndexList pages={pages} />} />
       <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
     </Routes>
