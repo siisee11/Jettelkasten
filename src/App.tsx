@@ -102,7 +102,7 @@ const Home: React.FC = () => {
       <div className="home-inner">
         <h1>Jtelkasten</h1>
         <div className="home-links">
-          <Link to="/list">posts/</Link>
+          <Link to="/posts">posts/</Link>
           <Link to="/about">about/</Link>
           <Link to="/keywords">keywords/</Link>
         </div>
@@ -158,7 +158,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
-      <Route path="/list" element={<IndexList pages={pages} />} />
+      <Route path="/posts" element={<IndexList pages={pages} />} />
       <Route path="/keywords" element={<KeywordList pages={pages} />} />
       <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
       <Route path="*" element={<NotFound />} />
