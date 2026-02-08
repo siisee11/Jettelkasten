@@ -10,13 +10,13 @@ body {
 }
 
 .page {
-  max-width: 720px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 32px 24px;
 }
 
 .page.home {
-  max-width: 1200px;
+  max-width: 1500px;
 }
 
 .home {
