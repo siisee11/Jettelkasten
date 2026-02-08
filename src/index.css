@@ -57,7 +57,22 @@ h1 {
 .aliases {
   font-size: 0.9em;
   color: #666;
-  margin: 4px 0 12px 0;
+  margin: 4px 0 8px 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tag-badge {
+  font-size: 0.8em;
+  padding: 2px 6px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  color: #333;
 }
 
 .graph {
