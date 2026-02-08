@@ -88,6 +88,10 @@ code, pre {
 }
 
 /* reduce header/footers */
+.page-header {
+  margin-top: 0.5rem !important;
+}
+
 footer {
   margin-top: 3rem;
   color: var(--gray);
