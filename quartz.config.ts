@@ -12,7 +12,7 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: { provider: "google", tagId: "G-4JWNMCNCDL" },
-    baseUrl: "siisee11.pages.dev",
+    baseUrl: "namjaeyoun.com",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
