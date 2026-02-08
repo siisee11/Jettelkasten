@@ -31,13 +31,26 @@ const collectMarkdownFiles = (dir, acc = []) => {
   return acc;
 };
 
+const normalizeWikiTarget = (target) => {
+  const cleaned = target.replace(/^\.*\//, "").replace(/\.md$/i, "");
+  return slugifyPath(cleaned);
+};
+
+const convertWikilinks = (raw) => {
+  return raw.replace(/\[\[([^\]|#]+)(?:\|([^\]]+))?\]\]/g, (_, t, label) => {
+    const slug = normalizeWikiTarget(t.trim());
+    const text = (label ?? t).split("/").pop();
+    return `[${text}](/${slug})`;
+  });
+};
+
 const parseLinks = (raw) => {
   const links = new Set();
   const wiki = /\[\[([^\]|#]+)(?:\|[^\]]+)?\]\]/g;
   const md = /\]\((?!https?:\/\/)([^)]+)\)/g;
   let m;
-  while ((m = wiki.exec(raw))) links.add(m[1]);
-  while ((m = md.exec(raw))) links.add(m[1].replace(/\.md$/i, ""));
+  while ((m = wiki.exec(raw))) links.add(normalizeWikiTarget(m[1]));
+  while ((m = md.exec(raw))) links.add(normalizeWikiTarget(m[1]));
   return Array.from(links);
 };
 
@@ -53,13 +66,14 @@ const main = async () => {
   for (const file of files) {
     const raw = fs.readFileSync(file, "utf8");
     const { data, content } = matter(raw);
+    const normalized = convertWikilinks(content);
     const rel = path.relative(contentDir, file);
     const slug = slugifyPath(rel);
     const title = data.title ?? path.basename(rel, ".md");
     const tags = Array.isArray(data.tags) ? data.tags : [];
     const date = data.date ?? null;
-    const linksOut = parseLinks(raw).map((p) => slugifyPath(p));
-    const bodyHtml = await toHtml(content);
+    const linksOut = parseLinks(raw);
+    const bodyHtml = await toHtml(normalized);
 
     pages.push({ slug, title, tags, date, linksOut, bodyHtml });
   }
