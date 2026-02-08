@@ -72,7 +72,8 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
         <div className="aliases">Aliases: {page.aliases.join(", ")}</div>
       )}
       <div className="content" dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
-      {page.tags.includes("keyword") && localGraph.nodes.length > 1 && (
+      {(page.tags.includes("keyword") || page.tags.includes("person")) &&
+        localGraph.nodes.length > 1 && (
         <div className="graph">
           <ForceGraph2D
             graphData={localGraph}
@@ -110,7 +111,9 @@ const Home: React.FC = () => {
 };
 
 const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
-  const list = pages.filter((p) => p.slug !== "index" && !p.tags.includes("keyword"));
+  const list = pages.filter(
+    (p) => p.slug !== "index" && !p.tags.includes("keyword") && !p.tags.includes("person"),
+  );
   return (
     <div className="page home">
       <div className="home-inner">
