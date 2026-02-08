@@ -4,4 +4,5 @@ aliases:
   - 미래
 tags:
   - public
+  - keyword
 ---

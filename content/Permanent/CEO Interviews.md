@@ -1,6 +1,7 @@
 ---
 tags:
   - public
+  - category
 ---
 - [[Drew Houston  - Dropbox 인터뷰]] 
 

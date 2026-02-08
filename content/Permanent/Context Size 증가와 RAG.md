@@ -2,7 +2,7 @@
 tags:
   - public
 ---
-[[../Permanent/LLM|LLM]] [[../Permanent/RAG]]
+[[../Permanent/LLM|LLM]] [[RAG]]
 
 [llama index 의 블로그 글](https://www.llamaindex.ai/blog/towards-long-context-rag)을 읽고...
 

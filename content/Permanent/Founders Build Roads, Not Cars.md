@@ -2,7 +2,7 @@
 tags:
   - public
 ---
-[[../Permanent/Patrick Collison]] [[../Permanent/Stripe]]
+[[Patrick Collison]]  [[Stripe]]
 
 ## Founders Build Roads, Not Cars
 * 영상 제목
@@ -19,7 +19,7 @@ tags:
 기술 산업에 얼마나 큰 영향을 줄 수 있나. 더 많은 기술 기업들이 시작할 수 있게 하는것.
 "being causally responsible for having more successful technology companies get started."
 
---- 생각
+[[thought]]
 Stripe는 온라인 결제를 도와주는 기업 정도로 생각하고 있었는데 콜리슨의 저 말을 들으니 정말 비전을 잘 따라서 가고 있구나 라는 생각이 들었음. 온라인 결제 관련된 많은 국제 규제들을 맡아서 처리해주면서 기술 기업들에게는 그 기업 본연의 가치에 집중할 수 있는 시간을 벌어주고 더 시작하기 쉽게 해줌.
 
 

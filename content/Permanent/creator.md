@@ -4,4 +4,5 @@ aliases:
   - supplier
 tags:
   - public
+  - keyword
 ---

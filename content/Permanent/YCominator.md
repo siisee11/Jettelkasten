@@ -4,7 +4,6 @@ tags:
   - public
   - keyword
 ---
-
 ## Ycombinator Youtube 영상
 
 ### Startup School

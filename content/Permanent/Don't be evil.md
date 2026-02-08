@@ -2,7 +2,6 @@
 tags:
   - public
 ---
-
-[[../Permanent/Paul Graham]]
+[[Paul Graham]]
 
 구글의 행동강령

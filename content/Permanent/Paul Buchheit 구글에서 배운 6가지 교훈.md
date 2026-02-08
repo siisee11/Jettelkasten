@@ -3,9 +3,9 @@ tags:
   - public
 aliases:
 ---
-
-[[../Permanent/Paul Buchheit]] [[../Reference/Speech]]
-[[../Permanent/Don't be evil]]
+[[Paul Buchheit]]
+[[Speech]]
+[[Don't be evil]]
 
 ###  Startup
 * 스타트업은 평범한 사람이 하는 게 아니다.

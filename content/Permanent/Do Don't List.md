@@ -4,7 +4,6 @@ aliases:
 tags:
   - public
 ---
-
 # DO
 
 * 한시간에 한번씩 멀리 보기

@@ -4,4 +4,5 @@ aliases:
   - 사전검시
 tags:
   - public
+  - keyword
 ---

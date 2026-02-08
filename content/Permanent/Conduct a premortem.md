@@ -2,7 +2,7 @@
 tags:
   - public
 ---
-[[../Permanent/Guy Kawasaki]]
+[[Guy Kawasaki]]
 [[../Permanent/premortem|premortem]]
 
 [Youtube link](https://www.youtube.com/watch?v=zN-PT8PYjTo)

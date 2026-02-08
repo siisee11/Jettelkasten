@@ -2,7 +2,7 @@
 tags:
   - public
 ---
-[[../Reference/Speech|Speech]]
+[[Speech|Speech]]
 https://youtu.be/NG8UPFr2FEo
 
 ## Asymmetric life

@@ -2,6 +2,7 @@
 tags:
   - public
   - keyword
+  - category
 aliases:
   - 책
 ---

@@ -2,13 +2,13 @@
 tags:
   - public
 ---
-[[../Permanent/metric]]
-[[../Permanent/KPI]]
+[[metric]]
+[[KPI]]
 
 ## Primary KPI
 * A task involving 
-	* Talking to User  [[../Permanent/user]]
-	* Building and Iterating #building
+	* Talking to [[user]]
+	* Building and Iterating
 
 ### Fake progress 
 [[fake progress]]

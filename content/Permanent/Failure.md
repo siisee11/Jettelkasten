@@ -4,4 +4,5 @@ aliases:
   - 실패
 tags:
   - public
+  - keyword
 ---

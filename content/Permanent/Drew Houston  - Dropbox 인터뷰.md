@@ -65,5 +65,5 @@ tags:
 ## 책 추천 
 
 * [[자기경영노트]]
-* [High Output Management](http://www.yes24.com/Product/Goods/62493009) #book [[High Output Management]]
-* Poor Charlies’s Almanack #book 
+* [High Output Management](http://www.yes24.com/Product/Goods/62493009) [[High Output Management]]
+* Poor Charlies’s Almanack
