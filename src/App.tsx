@@ -75,15 +75,7 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
         <div className="aliases">Aliases: {page.aliases.join(", ")}</div>
       )}
       {page.tags?.filter((t) => t !== "public").length > 0 && (
-        <div className="tags">
-          {page.tags
-            .filter((t) => t !== "public")
-            .map((t) => (
-              <span key={t} className="tag-badge">
-                {t}
-              </span>
-            ))}
-        </div>
+        <div className="aliases">Tags: {page.tags.filter((t) => t !== "public").join(", ")}</div>
       )}
       <div className="content" dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
       {(page.tags.includes("keyword") || page.tags.includes("person")) &&
