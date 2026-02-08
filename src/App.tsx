@@ -110,15 +110,23 @@ const NotFound: React.FC = () => (
   </div>
 );
 
-const Home: React.FC = () => {
+const Home: React.FC<{ pages: Page[] }> = ({ pages }) => {
+  const categoryPages = pages.filter((p) => p.tags.includes("category"));
   return (
     <div className="page home">
       <div className="home-inner">
         <h1>Jtelkasten</h1>
         <div className="home-links">
-          <Link to="/posts">posts/</Link>
           <Link to="/about">about/</Link>
+          <Link to="/posts">posts/</Link>
           <Link to="/keywords">keywords/</Link>
+        </div>
+        <div className="home-links">
+          {categoryPages.map((p) => (
+            <div key={p.slug}>
+              <Link to={`/${p.slug}`}>{p.slug}</Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -176,7 +184,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home pages={pages} />} />
       <Route path="/about" element={<About />} />
       <Route path="/posts" element={<IndexList pages={pages} />} />
       <Route path="/keywords" element={<KeywordList pages={pages} />} />
