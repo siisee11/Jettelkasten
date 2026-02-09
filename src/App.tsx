@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Route, Routes, useParams, Link } from "react-router-dom";
 import About from "./About";
 import ForceGraph2D from "react-force-graph-2d";
+import HomeSidebar from "./HomeSidebar";
 
 type Page = {
   slug: string;
@@ -104,6 +105,7 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
 
   return (
     <div className="page">
+      <HomeSidebar pages={pages} />
       <div className="top-nav">
         <Link to="/">home/</Link>
       </div>
@@ -161,24 +163,10 @@ const NotFound: React.FC = () => (
 );
 
 const Home: React.FC<{ pages: Page[] }> = ({ pages }) => {
-  const categoryPages = pages.filter((p) => p.tags.includes("category"));
   return (
     <div className="page home">
       <div className="home-inner">
-        <h1>Jtelkasten</h1>
-        <div className="home-links">
-          <Link to="/about">about</Link>
-          <Link to="/graph">graph</Link>
-          <Link to="/posts">posts</Link>
-          <Link to="/keywords">keywords</Link>
-        </div>
-        <div className="home-links" style={{ marginTop: 8 }}>
-          {categoryPages.map((p) => (
-            <Link key={p.slug} to={`/${p.slug}`}>
-              {p.slug.replace(/^p\//, "")}
-            </Link>
-          ))}
-        </div>
+        <HomeSidebar pages={pages} className="always" />
       </div>
     </div>
   );
@@ -190,6 +178,7 @@ const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   );
   return (
     <div className="page home">
+      <HomeSidebar pages={pages} />
       <div className="top-nav">
         <Link to="/">home/</Link>
       </div>
@@ -211,6 +200,7 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   const list = pages.filter((p) => p.tags.includes("keyword"));
   return (
     <div className="page home">
+      <HomeSidebar pages={pages} />
       <div className="top-nav">
         <Link to="/">home/</Link>
       </div>
@@ -228,7 +218,7 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   );
 };
 
-const GraphPage: React.FC<{ graph: Graph }> = ({ graph }) => {
+const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) => {
   const [graphSize, setGraphSize] = useState({ width: 900, height: 520 });
   useEffect(() => {
     const updateSize = () => {
@@ -246,6 +236,7 @@ const GraphPage: React.FC<{ graph: Graph }> = ({ graph }) => {
 
   return (
     <div className="page">
+      <HomeSidebar pages={pages} />
       <div className="top-nav">
         <Link to="/">home/</Link>
       </div>
@@ -274,10 +265,10 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home pages={pages} />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/about" element={<About pages={pages} />} />
       <Route path="/posts" element={<IndexList pages={pages} />} />
       <Route path="/keywords" element={<KeywordList pages={pages} />} />
-      <Route path="/graph" element={<GraphPage graph={graph} />} />
+      <Route path="/graph" element={<GraphPage graph={graph} pages={pages} />} />
       <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

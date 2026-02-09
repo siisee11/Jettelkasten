@@ -35,11 +35,35 @@ body {
   text-align: right;
 }
 
+.home-sidebar {
+  text-align: right;
+}
+
 .home-links {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 6px;
+}
+
+@media (min-width: 769px) {
+  .home-sidebar {
+    position: fixed;
+    right: 24px;
+    top: 32px;
+  }
+  .home-sidebar.always {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-sidebar {
+    display: none;
+  }
+  .home-sidebar.always {
+    display: block;
+  }
 }
 
 .top-nav {

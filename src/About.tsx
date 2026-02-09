@@ -1,8 +1,16 @@
 import React from "react";
+import HomeSidebar from "./HomeSidebar";
 
-export default function About() {
+type Page = {
+  slug: string;
+  title: string;
+  tags: string[];
+};
+
+export default function About({ pages }: { pages: Page[] }) {
   return (
     <div className="page">
+      <HomeSidebar pages={pages} />
       <div className="top-nav">
         <a href="/">home/</a>
       </div>
