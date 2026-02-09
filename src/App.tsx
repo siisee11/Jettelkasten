@@ -164,10 +164,8 @@ const NotFound: React.FC = () => (
 
 const Home: React.FC<{ pages: Page[] }> = ({ pages }) => {
   return (
-    <div className="page home">
-      <div className="home-inner">
-        <HomeSidebar pages={pages} className="always" />
-      </div>
+    <div className="page">
+      <HomeSidebar pages={pages} className="always" />
     </div>
   );
 };
