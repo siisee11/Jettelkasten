@@ -88,6 +88,8 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
             nodeRelSize={4}
             width={720}
             height={360}
+            linkColor={() => "#000"}
+            nodeColor={() => "#000"}
           />
         </div>
       )}
