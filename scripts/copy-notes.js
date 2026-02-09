@@ -34,8 +34,17 @@ function copyFiles(srcDir, destDir) {
                     const content = fs.readFileSync(srcFile, 'utf8');
                     const metadata = matter(content).data;
 
-                    // If it have the 'public' tag, copy it
-                    if (metadata.tags && metadata.tags.includes('public')) {
+                    const tags = Array.isArray(metadata.tags) ? metadata.tags : [];
+
+                    // If it has the 'private' tag, replace content before copying
+                    if (tags.includes('private')) {
+                        const sanitized = matter.stringify('This document is private.', metadata);
+                        fs.writeFileSync(destFile, sanitized, 'utf8');
+                        return;
+                    }
+
+                    // If it has the 'public' tag, copy it
+                    if (tags.includes('public')) {
                         fs.copyFile(srcFile, destFile, (err) => {
                             if (err) {
                                 console.error(`Error copying file ${srcFile}.`, err);
