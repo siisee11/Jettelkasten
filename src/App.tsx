@@ -164,7 +164,7 @@ const NotFound: React.FC = () => (
 
 const Home: React.FC<{ pages: Page[] }> = ({ pages }) => {
   return (
-    <div className="page homeonly">
+    <div className="page">
       <HomeSidebar pages={pages} className="always" />
     </div>
   );

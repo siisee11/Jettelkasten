@@ -15,11 +15,6 @@ body {
   padding: 32px 24px 32px 224px;
 }
 
-.page.home,
-.page.homeonly {
-  padding-right: 0;
-}
-
 .page.home {
   max-width: 1500px;
 }
