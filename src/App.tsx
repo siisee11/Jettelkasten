@@ -165,6 +165,7 @@ const Home: React.FC<{ pages: Page[] }> = ({ pages }) => {
         <h1>Jtelkasten</h1>
         <div className="home-links">
           <Link to="/about">about</Link>
+          <Link to="/graph">graph</Link>
           <Link to="/posts">posts</Link>
           <Link to="/keywords">keywords</Link>
         </div>
@@ -224,6 +225,41 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   );
 };
 
+const GraphPage: React.FC<{ graph: Graph }> = ({ graph }) => {
+  const [graphSize, setGraphSize] = useState({ width: 900, height: 520 });
+  useEffect(() => {
+    const updateSize = () => {
+      const w = Math.min(1200, Math.max(280, window.innerWidth - 120));
+      const h = Math.min(700, Math.max(240, Math.floor(w * 0.6)));
+      setGraphSize({ width: w, height: h });
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  return (
+    <div className="page">
+      <div className="top-nav">
+        <Link to="/">home/</Link>
+      </div>
+      <h1>Graph</h1>
+      <div className="graph">
+        <ForceGraph2D
+          graphData={{ nodes: graph.nodes, links: graph.edges }}
+          nodeId="id"
+          nodeLabel={(n: any) => n.title}
+          nodeRelSize={3}
+          width={graphSize.width}
+          height={graphSize.height}
+          linkColor={() => "#777"}
+          nodeColor={() => "#000"}
+        />
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const { pages, graph } = useData();
 
@@ -235,6 +271,7 @@ export default function App() {
       <Route path="/about" element={<About />} />
       <Route path="/posts" element={<IndexList pages={pages} />} />
       <Route path="/keywords" element={<KeywordList pages={pages} />} />
+      <Route path="/graph" element={<GraphPage graph={graph} />} />
       <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
