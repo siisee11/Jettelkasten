@@ -88,8 +88,11 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
   const [graphSize, setGraphSize] = useState({ width: 720, height: 360 });
   useEffect(() => {
     const updateSize = () => {
-      const w = Math.min(720, Math.max(280, window.innerWidth - 80));
-      const h = Math.min(360, Math.max(220, Math.floor(w * 0.5)));
+      const isMobile = window.innerWidth <= 768;
+      const w = isMobile
+        ? Math.max(240, window.innerWidth - 48)
+        : Math.min(720, Math.max(280, window.innerWidth - 80));
+      const h = Math.min(isMobile ? 420 : 360, Math.max(220, Math.floor(w * 0.5)));
       setGraphSize({ width: w, height: h });
     };
     updateSize();
@@ -229,8 +232,11 @@ const GraphPage: React.FC<{ graph: Graph }> = ({ graph }) => {
   const [graphSize, setGraphSize] = useState({ width: 900, height: 520 });
   useEffect(() => {
     const updateSize = () => {
-      const w = Math.min(1200, Math.max(280, window.innerWidth - 120));
-      const h = Math.min(700, Math.max(240, Math.floor(w * 0.6)));
+      const isMobile = window.innerWidth <= 768;
+      const w = isMobile
+        ? Math.max(240, window.innerWidth - 48)
+        : Math.min(1200, Math.max(280, window.innerWidth - 120));
+      const h = Math.min(isMobile ? 520 : 700, Math.max(240, Math.floor(w * 0.6)));
       setGraphSize({ width: w, height: h });
     };
     updateSize();
