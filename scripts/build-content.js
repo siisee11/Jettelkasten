@@ -36,7 +36,7 @@ const collectMarkdownFiles = (dir, acc = []) => {
 
 const normalizeWikiTarget = (target) => {
   const cleaned = target.replace(/^\.*\//, "").replace(/\.md$/i, "");
-  return slugifyPath(cleaned);
+  return `p/${slugifySegment(cleaned.split("/").pop())}`;
 };
 
 const convertWikilinks = (raw) => {
@@ -77,7 +77,8 @@ const main = async () => {
       (a) => typeof a === "string" && /^[A-Za-z0-9 _.-]+$/.test(a),
     );
     const slugBase = englishAlias ? englishAlias : rel;
-    const slug = slugifyPath(slugBase);
+    const fileBase = path.basename(slugBase, ".md");
+    const slug = `p/${slugifySegment(fileBase)}`;
 
     const title = data.title ?? path.basename(rel, ".md");
     const tags = Array.isArray(data.tags) ? data.tags : [];
