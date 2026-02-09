@@ -53,6 +53,23 @@ const buildLocalGraph = (graph: Graph, center: string, hops = 2) => {
   return { nodes, links: edges.map((e) => ({ source: e.source, target: e.target })) };
 };
 
+const buildDepthMap = (graph: Graph, center: string, maxDepth = 2) => {
+  const depth = new Map([[center, 0]]);
+  let frontier = new Set([center]);
+  for (let d = 1; d <= maxDepth; d++) {
+    const next = new Set<string>();
+    for (const e of graph.edges) {
+      const s = typeof e.source === "string" ? e.source : (e.source as any).id;
+      const t = typeof e.target === "string" ? e.target : (e.target as any).id;
+      if (frontier.has(s) && !depth.has(t)) next.add(t);
+      if (frontier.has(t) && !depth.has(s)) next.add(s);
+    }
+    for (const n of next) depth.set(n, d);
+    frontier = next;
+  }
+  return depth;
+};
+
 const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) => {
   const params = useParams();
   const slug = params["*"] || "index";
@@ -61,6 +78,11 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
   const localGraph = useMemo(() => {
     if (!page) return { nodes: [], links: [] };
     return buildLocalGraph(graph, page.slug, 2);
+  }, [graph, page]);
+
+  const depthMap = useMemo(() => {
+    if (!page) return new Map();
+    return buildDepthMap(graph, page.slug, 2);
   }, [graph, page]);
 
   if (!page) return <div className="page">Not found</div>;
@@ -88,8 +110,16 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
             nodeRelSize={4}
             width={720}
             height={360}
-            linkColor={() => "#000"}
-            nodeColor={() => "#000"}
+            linkColor={(l: any) => {
+              const s = typeof l.source === "string" ? l.source : l.source?.id;
+              const t = typeof l.target === "string" ? l.target : l.target?.id;
+              const d = Math.max(depthMap.get(s) ?? 2, depthMap.get(t) ?? 2);
+              return d <= 1 ? "#000" : "#444";
+            }}
+            nodeColor={(n: any) => {
+              const d = depthMap.get(n.id) ?? 2;
+              return d <= 1 ? "#000" : "#444";
+            }}
           />
         </div>
       )}
