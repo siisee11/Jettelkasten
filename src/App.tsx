@@ -152,9 +152,9 @@ const Home: React.FC<{ pages: Page[] }> = ({ pages }) => {
       <div className="home-inner">
         <h1>Jtelkasten</h1>
         <div className="home-links">
-          <Link to="/about">about/</Link>
-          <Link to="/posts">posts/</Link>
-          <Link to="/keywords">keywords/</Link>
+          <Link to="/about">about</Link>
+          <Link to="/posts">posts</Link>
+          <Link to="/keywords">keywords</Link>
         </div>
         <div className="home-links" style={{ marginTop: 8 }}>
           {categoryPages.map((p) => (
