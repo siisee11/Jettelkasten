@@ -126,11 +126,11 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
               const s = typeof l.source === "string" ? l.source : l.source?.id;
               const t = typeof l.target === "string" ? l.target : l.target?.id;
               const d = Math.max(depthMap.get(s) ?? 2, depthMap.get(t) ?? 2);
-              return d <= 1 ? "#000" : "#444";
+              return d <= 1 ? "#000" : "#777";
             }}
             nodeColor={(n: any) => {
               const d = depthMap.get(n.id) ?? 2;
-              return d <= 1 ? "#000" : "#444";
+              return d <= 1 ? "#000" : "#777";
             }}
           />
         </div>
