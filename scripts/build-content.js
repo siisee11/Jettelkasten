@@ -84,7 +84,9 @@ const main = async () => {
     const tags = Array.isArray(data.tags) ? data.tags : [];
     const date = data.date ?? null;
     const linksOut = parseLinks(raw);
-    const bodyHtml = await toHtml(normalized);
+    const bodyHtml = tags.includes("private")
+      ? "<p>This document is not public.</p>"
+      : await toHtml(normalized);
 
     pages.push({ slug, title, tags, aliases, date, linksOut, bodyHtml });
   }
