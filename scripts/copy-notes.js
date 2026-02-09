@@ -22,6 +22,11 @@ function copyFiles(srcDir, destDir) {
             const srcFile = path.join(srcDir, file);
             const destFile = path.join(destDir, file);
 
+            // Skip Secrets folder entirely
+            if (file === 'Secrets') {
+                return;
+            }
+
             // Check if it's a file or a directory
             fs.stat(srcFile, (err, stat) => {
                 if (err) {

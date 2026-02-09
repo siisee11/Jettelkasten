@@ -2,8 +2,7 @@
 tags:
   - public
 ---
-[[book|book]]
-
+[[book|book]] [[network effect]] 
 # The Cold Start Problem
 
 # Meercat’s Law

@@ -4,6 +4,7 @@ aliases:
   - 최소 기능 제품
 tags:
   - public
+  - keyword
 ---
 
 [[아이디어 불패 법칙|The Right It]]

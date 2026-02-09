@@ -1,5 +1,5 @@
 ---
-alias: 폴 부헤잇
+aliases: 폴 부헤잇
 tags:
   - public
   - person

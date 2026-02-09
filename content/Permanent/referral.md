@@ -4,4 +4,5 @@ aliases:
   - 레퍼럴
 tags:
   - public
+  - keyword
 ---
