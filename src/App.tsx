@@ -120,7 +120,7 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
       {page.tags.includes("category") && localGraph.nodes.length > 1 && (
         <div className="home-links left-align">
           {localGraph.nodes
-            .filter((n) => n.id !== page.slug)
+            .filter((n) => n.id !== page.slug && (depthMap.get(n.id) ?? 2) === 1)
             .map((n) => (
               <Link key={n.id} to={`/${n.slug || n.id}`}>
                 {n.title || n.id}
