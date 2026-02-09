@@ -47,6 +47,9 @@ body {
 }
 
 @media (min-width: 769px) {
+  .page {
+    padding-right: 260px;
+  }
   .home-sidebar {
     position: fixed;
     right: 24px;
