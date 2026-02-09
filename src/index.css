@@ -46,6 +46,11 @@ body {
   gap: 6px;
 }
 
+.home-links.left-align {
+  align-items: flex-start;
+  text-align: left;
+}
+
 @media (min-width: 769px) {
   .page {
     padding-right: 260px;

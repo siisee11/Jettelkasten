@@ -118,7 +118,7 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
       )}
       <div className="content" dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
       {page.tags.includes("category") && localGraph.nodes.length > 1 && (
-        <div className="home-links">
+        <div className="home-links left-align">
           {localGraph.nodes
             .filter((n) => n.id !== page.slug)
             .map((n) => (
