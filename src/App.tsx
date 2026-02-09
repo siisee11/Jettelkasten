@@ -85,6 +85,18 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
     return buildDepthMap(graph, page.slug, 2);
   }, [graph, page]);
 
+  const [graphSize, setGraphSize] = useState({ width: 720, height: 360 });
+  useEffect(() => {
+    const updateSize = () => {
+      const w = Math.min(720, Math.max(280, window.innerWidth - 80));
+      const h = Math.min(360, Math.max(220, Math.floor(w * 0.5)));
+      setGraphSize({ width: w, height: h });
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   if (!page) return <div className="page">Not found</div>;
 
   return (
@@ -108,8 +120,8 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
             nodeId="id"
             nodeLabel={(n: any) => n.title}
             nodeRelSize={4}
-            width={720}
-            height={360}
+            width={graphSize.width}
+            height={graphSize.height}
             linkColor={(l: any) => {
               const s = typeof l.source === "string" ? l.source : l.source?.id;
               const t = typeof l.target === "string" ? l.target : l.target?.id;
