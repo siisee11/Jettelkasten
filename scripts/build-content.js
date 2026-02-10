@@ -89,9 +89,11 @@ const main = async () => {
       : await toHtml(normalized);
 
     const stats = fs.statSync(file);
+    const createdFromMeta = data.created ?? data.createdAt ?? null;
+    const updatedFromMeta = data.updated ?? data.updatedAt ?? data.lastmod ?? data.modified ?? null;
     const created = stats.birthtime;
-    const createdAt = created.getFullYear() >= 2000 ? created.toISOString() : null;
-    const updatedAt = stats.mtime.toISOString();
+    const createdAt = createdFromMeta ?? (created.getFullYear() >= 2000 ? created.toISOString() : null);
+    const updatedAt = updatedFromMeta ?? stats.mtime.toISOString();
 
     pages.push({ slug, title, tags, aliases, date, linksOut, bodyHtml, createdAt, updatedAt });
   }

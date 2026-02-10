@@ -40,21 +40,31 @@ function copyFiles(srcDir, destDir) {
                     const metadata = matter(content).data;
 
                     const tags = Array.isArray(metadata.tags) ? metadata.tags : [];
+                    const stats = fs.statSync(srcFile);
+                    const created = stats.birthtime.toISOString();
+                    const updated = stats.mtime.toISOString();
 
                     // If it has the 'private' tag, replace content before copying
                     if (tags.includes('private')) {
-                        const sanitized = matter.stringify('This document is private.', metadata);
+                        const sanitized = matter.stringify('This document is private.', {
+                            ...metadata,
+                            created,
+                            updated,
+                        });
                         fs.writeFileSync(destFile, sanitized, 'utf8');
                         return;
                     }
 
-                    // If it has the 'public' tag, copy it
+                    // If it has the 'public' tag, copy it and inject created/updated
                     if (tags.includes('public')) {
-                        fs.copyFile(srcFile, destFile, (err) => {
-                            if (err) {
-                                console.error(`Error copying file ${srcFile}.`, err);
-                            }
+                        const raw = fs.readFileSync(srcFile, 'utf8');
+                        const parsed = matter(raw);
+                        const withDates = matter.stringify(parsed.content, {
+                            ...parsed.data,
+                            created,
+                            updated,
                         });
+                        fs.writeFileSync(destFile, withDates, 'utf8');
                     }
                 } else if (stat.isDirectory()) {
                     // It's a directory, create it and recurse
