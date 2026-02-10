@@ -89,7 +89,8 @@ const main = async () => {
       : await toHtml(normalized);
 
     const stats = fs.statSync(file);
-    const createdAt = stats.birthtime.toISOString();
+    const created = stats.birthtime;
+    const createdAt = created.getFullYear() >= 2000 ? created.toISOString() : null;
     const updatedAt = stats.mtime.toISOString();
 
     pages.push({ slug, title, tags, aliases, date, linksOut, bodyHtml, createdAt, updatedAt });
