@@ -12,6 +12,8 @@ type Page = {
   aliases: string[];
   date: string | null;
   linksOut: string[];
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 type Graph = {
@@ -112,6 +114,13 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
       <h1>{page.title}</h1>
       {page.aliases?.length > 0 && (
         <div className="aliases">Aliases: {page.aliases.join(", ")}</div>
+      )}
+      {(page.createdAt || page.updatedAt) && (
+        <div className="aliases">
+          {page.createdAt && `Created: ${new Date(page.createdAt).toLocaleDateString()}`}
+          {page.createdAt && page.updatedAt && " · "}
+          {page.updatedAt && `Updated: ${new Date(page.updatedAt).toLocaleDateString()}`}
+        </div>
       )}
       {page.tags?.filter((t) => t !== "public").length > 0 && (
         <div className="aliases">Tags: {page.tags.filter((t) => t !== "public").join(", ")}</div>

@@ -88,7 +88,11 @@ const main = async () => {
       ? "<p>This document is not public.</p>"
       : await toHtml(normalized);
 
-    pages.push({ slug, title, tags, aliases, date, linksOut, bodyHtml });
+    const stats = fs.statSync(file);
+    const createdAt = stats.birthtime.toISOString();
+    const updatedAt = stats.mtime.toISOString();
+
+    pages.push({ slug, title, tags, aliases, date, linksOut, bodyHtml, createdAt, updatedAt });
   }
 
   const bySlug = new Map(pages.map((p) => [p.slug, p]));
