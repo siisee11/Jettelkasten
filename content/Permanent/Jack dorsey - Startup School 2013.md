@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2024-02-08T00:53:16.000Z'
+updated: '2026-02-08T13:35:23.000Z'
 ---
 [[Jack Dorsey]]
 

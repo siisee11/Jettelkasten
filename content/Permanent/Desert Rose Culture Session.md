@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2026-01-21T08:03:37.000Z'
+updated: '2026-02-08T12:23:59.000Z'
 ---
 [[김우진]] 님의 컬쳐세션 in [[Desert Rose]]
 

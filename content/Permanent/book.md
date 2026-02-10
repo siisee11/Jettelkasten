@@ -5,14 +5,7 @@ tags:
   - category
 aliases:
   - 책
+created: '2024-02-08T00:56:05.000Z'
+updated: '2026-02-10T05:59:04.000Z'
 ---
-[[자기경영노트]]
-[[Cold Start Problem]]
-[[아이디어 불패 법칙|The Right It]]
-[[The Hard Thing]]
-[[제텔카스텐]]
-[[OKR]]
-[[No rules rules]]
-[[Bill Campbell|빌 캠벨]]
-[[Hook]]
-[[마인드셋]]
+

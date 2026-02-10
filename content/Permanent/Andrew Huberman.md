@@ -4,6 +4,8 @@ aliases:
 tags:
   - public
   - person
+created: '2023-10-25T11:51:15.000Z'
+updated: '2026-02-08T07:55:49.000Z'
 ---
 [[도파민]]
 

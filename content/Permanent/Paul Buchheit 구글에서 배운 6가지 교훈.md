@@ -1,7 +1,9 @@
 ---
 tags:
   - public
-aliases:
+aliases: null
+created: '2024-02-02T13:28:47.000Z'
+updated: '2026-02-09T00:30:52.000Z'
 ---
 [[Paul Buchheit]]
 [[Speech]]

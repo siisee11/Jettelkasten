@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2023-07-27T16:14:13.000Z'
+updated: '2026-02-09T07:04:19.000Z'
 ---
 [[Permanent/culture|culture]]
 [[personality]]

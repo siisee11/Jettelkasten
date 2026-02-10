@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2023-01-18T15:10:14.000Z'
+updated: '2026-02-08T13:29:06.000Z'
 ---
 [영상](https://youtu.be/mLHp25mUd40)
 

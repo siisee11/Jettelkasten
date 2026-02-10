@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2024-02-01T14:04:32.000Z'
+updated: '2026-02-09T07:04:00.000Z'
 ---
 [[Bill Eckstrom]]
 [[TED]]

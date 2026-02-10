@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2024-02-08T00:56:30.000Z'
+updated: '2026-02-08T13:30:29.000Z'
 ---
 [[Speech]]
 [[Nir Eyal]]

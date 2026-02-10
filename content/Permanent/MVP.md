@@ -5,6 +5,8 @@ aliases:
 tags:
   - public
   - keyword
+created: '2024-07-16T04:39:54.000Z'
+updated: '2026-02-09T00:23:46.000Z'
 ---
 
 [[아이디어 불패 법칙|The Right It]]

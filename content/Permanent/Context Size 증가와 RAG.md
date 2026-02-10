@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2024-03-04T13:44:57.000Z'
+updated: '2026-02-08T12:25:21.000Z'
 ---
 [[../Permanent/LLM|LLM]] [[RAG]]
 

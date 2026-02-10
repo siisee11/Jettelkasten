@@ -3,6 +3,8 @@ aliases:
   - 벌거벗은 정신력
 tags:
   - public
+created: '2024-03-12T15:58:40.000Z'
+updated: '2024-03-12T15:58:40.000Z'
 ---
 [[../Permanent/book|book]] 
 진선이 추천책

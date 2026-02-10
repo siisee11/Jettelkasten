@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2024-03-24T03:22:20.000Z'
+updated: '2024-03-24T03:22:20.000Z'
 ---
 [[../Permanent/meetup|meetup]]
 

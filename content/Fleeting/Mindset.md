@@ -3,6 +3,8 @@ aliases:
   - 마인드셋
 tags:
   - public
+created: '2026-02-09T07:13:07.000Z'
+updated: '2026-02-09T07:58:24.000Z'
 ---
 [[book]]
 

@@ -3,6 +3,8 @@ aliases:
   - 하이 아웃풋 매니지먼트
 tags:
   - public
+created: '2024-07-15T15:01:56.000Z'
+updated: '2024-07-15T15:01:56.000Z'
 ---
 [[../Permanent/book|book]]
 

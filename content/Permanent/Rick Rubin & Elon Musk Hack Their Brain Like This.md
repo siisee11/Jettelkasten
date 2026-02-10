@@ -1,6 +1,8 @@
 ---
 tags:
   - public
+created: '2024-02-14T09:47:50.000Z'
+updated: '2024-02-14T09:47:50.000Z'
 ---
 [[Andrew Huberman]]
 [[Interviews]]
