@@ -4,7 +4,7 @@ tags:
 aliases:
   - 링크드인
 created: '2024-02-01T14:13:49.000Z'
-updated: '2026-02-08T14:10:21.000Z'
+updated: '2026-02-08T14:10:21.887Z'
 ---
 ### My profile
 

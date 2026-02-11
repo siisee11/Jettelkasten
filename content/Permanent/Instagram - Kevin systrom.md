@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2024-02-01T13:52:16.000Z'
-updated: '2026-02-08T13:34:20.000Z'
+updated: '2026-02-08T13:34:20.602Z'
 ---
 [[CEO Interviews]] [[Connecting dots]] [[quote]]
 

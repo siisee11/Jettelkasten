@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2024-02-01T13:04:03.000Z'
-updated: '2026-02-08T07:47:19.000Z'
+updated: '2026-02-08T07:47:19.059Z'
 ---
 [참고](https://mixpanel.com/ko/blog/aarrr-pirate-metrics/)
 

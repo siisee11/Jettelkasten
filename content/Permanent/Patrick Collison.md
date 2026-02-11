@@ -4,6 +4,6 @@ tags:
   - public
   - person
 created: '2023-05-10T12:45:52.000Z'
-updated: '2026-02-09T00:26:13.000Z'
+updated: '2026-02-09T00:26:13.742Z'
 ---
 https://patrickcollison.com/

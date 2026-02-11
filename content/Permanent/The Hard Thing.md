@@ -3,7 +3,7 @@ aliases: 하드씽
 tags:
   - public
 created: '2024-02-08T00:53:16.000Z'
-updated: '2026-02-09T07:06:12.000Z'
+updated: '2026-02-09T07:06:12.747Z'
 ---
 
 [[book|book]]
