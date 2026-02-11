@@ -37,6 +37,8 @@ body {
 
 .home-sidebar {
   text-align: right;
+  position: relative;
+  z-index: 10;
 }
 
 .home-links {
@@ -118,6 +120,8 @@ h2 {
 
 .graph {
   margin-top: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 a {
