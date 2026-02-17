@@ -8,6 +8,94 @@ import remarkHtml from "remark-html";
 
 const contentDir = path.resolve("content");
 const outDir = path.resolve("public/data");
+const publicDir = path.resolve("public");
+const siteUrl = "https://namjaeyoun.com";
+
+const toAbsoluteUrl = (pathname) => {
+  const normalizedPath = pathname === "/" ? "/" : `/${String(pathname).replace(/^\/+/, "")}`;
+  return `${siteUrl}${normalizedPath}`;
+};
+
+const escapeXml = (value) =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+
+const writeRobots = () => {
+  const robots = [
+    "User-agent: *",
+    "Allow: /",
+    "Disallow: /data/",
+    `Sitemap: ${toAbsoluteUrl("/sitemap.xml")}`,
+    "",
+  ].join("\n");
+
+  fs.writeFileSync(path.join(publicDir, "robots.txt"), robots);
+};
+
+const writeSitemap = (pages) => {
+  const staticPaths = ["/", "/about", "/posts", "/keywords", "/graph"];
+  const nowIso = new Date().toISOString();
+  const entries = new Map();
+
+  for (const staticPath of staticPaths) {
+    entries.set(staticPath, nowIso);
+  }
+
+  for (const page of pages) {
+    if (page.tags.includes("private")) continue;
+    const pathName = page.slug === "index" ? "/" : `/${page.slug}`;
+    entries.set(pathName, page.updatedAt ?? nowIso);
+  }
+
+  const urls = Array.from(entries.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(
+      ([pathName, lastmod]) =>
+        `  <url>\n    <loc>${escapeXml(encodeURI(toAbsoluteUrl(pathName)))}</loc>\n    <lastmod>${escapeXml(lastmod)}</lastmod>\n  </url>`,
+    )
+    .join("\n");
+
+  const sitemap =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    urls +
+    "\n</urlset>\n";
+
+  fs.writeFileSync(path.join(publicDir, "sitemap.xml"), sitemap);
+};
+
+const writeRedirects = () => {
+  let canonicalHost = "namjaeyoun.com";
+  try {
+    canonicalHost = new URL(siteUrl).host;
+  } catch {
+    canonicalHost = "namjaeyoun.com";
+  }
+
+  const alternateHost = canonicalHost.startsWith("www.")
+    ? canonicalHost.slice(4)
+    : `www.${canonicalHost}`;
+
+  const rules = [
+    `http://${canonicalHost}/* https://${canonicalHost}/:splat 301`,
+    alternateHost !== canonicalHost
+      ? `http://${alternateHost}/* https://${canonicalHost}/:splat 301`
+      : null,
+    alternateHost !== canonicalHost
+      ? `https://${alternateHost}/* https://${canonicalHost}/:splat 301`
+      : null,
+    "/* /index.html 200",
+    "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  fs.writeFileSync(path.join(publicDir, "_redirects"), rules);
+};
 
 const slugifySegment = (seg) =>
   seg
@@ -112,8 +200,12 @@ const main = async () => {
   };
 
   fs.mkdirSync(outDir, { recursive: true });
+  fs.mkdirSync(publicDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, "content.json"), JSON.stringify(pages));
   fs.writeFileSync(path.join(outDir, "graph.json"), JSON.stringify(graph));
+  writeRobots();
+  writeSitemap(pages);
+  writeRedirects();
 };
 
 main().catch((err) => {

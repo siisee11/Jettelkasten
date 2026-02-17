@@ -22,3 +22,7 @@ npx quartz build --serve
 # How to deploy
 
 Just push to branch you specified on cloudflare
+
+## SEO canonical domain
+
+Canonical domain is hardcoded to `https://namjaeyoun.com`.

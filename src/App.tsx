@@ -3,6 +3,7 @@ import { Route, Routes, useParams, Link } from "react-router-dom";
 import About from "./About";
 import ForceGraph2D from "react-force-graph-2d";
 import HomeSidebar from "./HomeSidebar";
+import SeoHead from "./SeoHead";
 
 type Page = {
   slug: string;
@@ -270,14 +271,17 @@ export default function App() {
   if (!pages.length) return <div className="page">Loading…</div>;
 
   return (
-    <Routes>
-      <Route path="/" element={<Home pages={pages} />} />
-      <Route path="/about" element={<About pages={pages} />} />
-      <Route path="/posts" element={<IndexList pages={pages} />} />
-      <Route path="/keywords" element={<KeywordList pages={pages} />} />
-      <Route path="/graph" element={<GraphPage graph={graph} pages={pages} />} />
-      <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <SeoHead pages={pages} />
+      <Routes>
+        <Route path="/" element={<Home pages={pages} />} />
+        <Route path="/about" element={<About pages={pages} />} />
+        <Route path="/posts" element={<IndexList pages={pages} />} />
+        <Route path="/keywords" element={<KeywordList pages={pages} />} />
+        <Route path="/graph" element={<GraphPage graph={graph} pages={pages} />} />
+        <Route path="/*" element={<PageView pages={pages} graph={graph} />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
