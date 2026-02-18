@@ -74,6 +74,37 @@ const buildDepthMap = (graph: Graph, center: string, maxDepth = 2) => {
   return depth;
 };
 
+const toTimestamp = (value?: string | null): number | null => {
+  if (!value) return null;
+  const timestamp = Date.parse(value);
+  return Number.isNaN(timestamp) ? null : timestamp;
+};
+
+const getPostTimestamp = (page: Page): number => {
+  const postDate = page.updatedAt ?? page.date ?? page.createdAt ?? null;
+  return toTimestamp(postDate) ?? 0;
+};
+
+const formatRelativeEnglish = (value?: string | null): string => {
+  const timestamp = toTimestamp(value);
+  if (timestamp === null) return "";
+
+  const diffSeconds = Math.round((timestamp - Date.now()) / 1000);
+  const absSeconds = Math.abs(diffSeconds);
+  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+
+  if (absSeconds < 60) return rtf.format(diffSeconds, "second");
+  if (absSeconds < 60 * 60) return rtf.format(Math.round(diffSeconds / 60), "minute");
+  if (absSeconds < 60 * 60 * 24) return rtf.format(Math.round(diffSeconds / (60 * 60)), "hour");
+  if (absSeconds < 60 * 60 * 24 * 7) return rtf.format(Math.round(diffSeconds / (60 * 60 * 24)), "day");
+  if (absSeconds < 60 * 60 * 24 * 30)
+    return rtf.format(Math.round(diffSeconds / (60 * 60 * 24 * 7)), "week");
+  if (absSeconds < 60 * 60 * 24 * 365)
+    return rtf.format(Math.round(diffSeconds / (60 * 60 * 24 * 30)), "month");
+
+  return rtf.format(Math.round(diffSeconds / (60 * 60 * 24 * 365)), "year");
+};
+
 const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) => {
   const params = useParams();
   const slug = params["*"] || "index";
@@ -181,9 +212,14 @@ const Home: React.FC<{ pages: Page[] }> = ({ pages }) => {
 };
 
 const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
-  const list = pages.filter(
-    (p) => p.slug !== "index" && !p.tags.includes("keyword") && !p.tags.includes("person"),
+  const list = useMemo(
+    () =>
+      pages
+        .filter((p) => p.slug !== "index" && !p.tags.includes("keyword") && !p.tags.includes("person"))
+        .sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a)),
+    [pages],
   );
+
   return (
     <div className="page home">
       <HomeSidebar pages={pages} />
@@ -193,11 +229,16 @@ const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
       <div className="home-inner">
         <h1>Posts</h1>
         <div className="home-links">
-          {list.map((p) => (
-            <div key={p.slug}>
-              <Link to={`/${p.slug}`}>{p.title}</Link>
-            </div>
-          ))}
+          {list.map((p) => {
+            const postDate = p.updatedAt ?? p.date ?? p.createdAt ?? null;
+            const relativeDate = formatRelativeEnglish(postDate);
+            return (
+              <div key={p.slug}>
+                <Link to={`/${p.slug}`}>{p.title}</Link>
+                {relativeDate && <span> ({relativeDate})</span>}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
