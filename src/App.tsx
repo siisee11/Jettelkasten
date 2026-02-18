@@ -81,7 +81,7 @@ const toTimestamp = (value?: string | null): number | null => {
 };
 
 const getPostTimestamp = (page: Page): number => {
-  const postDate = page.updatedAt ?? page.date ?? page.createdAt ?? null;
+  const postDate = page.createdAt ?? null;
   return toTimestamp(postDate) ?? 0;
 };
 
@@ -215,7 +215,13 @@ const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
   const list = useMemo(
     () =>
       pages
-        .filter((p) => p.slug !== "index" && !p.tags.includes("keyword") && !p.tags.includes("person"))
+        .filter(
+          (p) =>
+            p.slug !== "index" &&
+            !p.tags.includes("keyword") &&
+            !p.tags.includes("person") &&
+            !p.tags.includes("category"),
+        )
         .sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a)),
     [pages],
   );
@@ -230,12 +236,12 @@ const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
         <h1>Posts</h1>
         <div className="home-links">
           {list.map((p) => {
-            const postDate = p.updatedAt ?? p.date ?? p.createdAt ?? null;
+            const postDate = p.createdAt ?? null;
             const relativeDate = formatRelativeEnglish(postDate);
             return (
-              <div key={p.slug}>
+              <div key={p.slug} className="post-list-item">
+                {relativeDate && <span className="post-list-date">{relativeDate}</span>}
                 <Link to={`/${p.slug}`}>{p.title}</Link>
-                {relativeDate && <span> ({relativeDate})</span>}
               </div>
             );
           })}
