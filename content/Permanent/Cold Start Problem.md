@@ -2,9 +2,9 @@
 tags:
   - public
 created: '2024-02-08T00:53:16.000Z'
-updated: '2026-02-09T00:24:29.882Z'
+updated: '2026-02-20T11:12:58.509Z'
 ---
-[[book|book]] [[network effect]] 
+[[bookshelf]] [[network effect]] 
 # The Cold Start Problem
 
 # Meercat’s Law

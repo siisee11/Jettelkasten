@@ -2,13 +2,13 @@
 tags:
   - public
 created: '2024-02-08T00:56:30.000Z'
-updated: '2026-02-08T13:30:29.148Z'
+updated: '2026-02-20T11:16:09.993Z'
 ---
 [[Speech]]
 [[Nir Eyal]]
 [[Habit-forming-product]]
 
-[[book]] [[Hook]]
+[[bookshelf]] [[Hook]]
 
 link : https://www.youtube.com/watch?v=-jXM4NymIcA&t=0s&ab_channel=StartupGrind
 

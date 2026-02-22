@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2024-02-08T00:53:16.000Z'
-updated: '2026-02-08T11:05:16.905Z'
+updated: '2026-02-20T11:17:25.089Z'
 ---
 [[CEO Interviews]]
 [[../Permanent/YCominator|YC]]
@@ -38,6 +38,6 @@ What is one thing that you believe that most of people don't believe?
 * 기업가 정신 그 자체를 가르치는 것은 어렵다. 대신 기업가 정신에 필요한 스킬을 가르칠 수 있다.
 	* 기업가 정신은 네트워크가 촘촘할수록 강해진다.
 
-피터 틸 - Zero to One 추천 [[book]]
+피터 틸 - Zero to One 추천 [[bookshelf]]
 
 

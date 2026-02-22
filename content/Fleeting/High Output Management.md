@@ -4,9 +4,9 @@ aliases:
 tags:
   - public
 created: '2024-07-15T15:01:56.000Z'
-updated: '2024-07-15T15:01:56.000Z'
+updated: '2026-02-20T11:15:37.364Z'
 ---
-[[../Permanent/book|book]]
+[[bookshelf]]
 
 저자: [[../Permanent/앤드류 그로브]]
 
