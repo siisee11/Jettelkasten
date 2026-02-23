@@ -4,11 +4,11 @@ aliases:
 tags:
   - public
 created: '2026-02-22T00:53:26.921Z'
-updated: '2026-02-22T09:51:01.743Z'
+updated: '2026-02-22T11:00:04.542Z'
 ---
 [[movie]]
 
+Anagram
 
 Shutter Island
-truths and lies
 truths denials
