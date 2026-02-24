@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2024-02-08T00:53:16.000Z'
-updated: '2026-02-20T11:17:25.089Z'
+updated: '2026-02-20T11:17:25.000Z'
 ---
 [[CEO Interviews]]
 [[../Permanent/YCominator|YC]]

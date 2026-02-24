@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2023-04-15T06:09:11.000Z'
-updated: '2026-02-11T00:59:04.964Z'
+updated: '2026-02-11T00:59:04.000Z'
 ---
 [[movie]]  [[life]]
 

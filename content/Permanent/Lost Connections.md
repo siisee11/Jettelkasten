@@ -4,7 +4,7 @@ aliases:
 tags:
   - public
 created: '2024-03-12T15:58:40.000Z'
-updated: '2026-02-20T11:16:36.388Z'
+updated: '2026-02-20T11:16:36.000Z'
 ---
 [[bookshelf]]
 진선이 추천책

@@ -6,9 +6,8 @@ tags:
   - public
   - keyword
 created: '2024-07-16T04:39:54.000Z'
-updated: '2026-02-09T00:23:46.972Z'
+updated: '2026-02-24T07:03:53.000Z'
 ---
-
 [[아이디어 불패 법칙|The Right It]]
 
 - MVP(or pretotyping)의 모순

@@ -1,8 +1,8 @@
 ---
 tags:
   - public
-created: '2026-01-20T18:21:23.285Z'
-updated: '2026-02-09T09:20:20.552Z'
+created: '2026-01-20T18:21:23.000Z'
+updated: '2026-02-09T09:20:20.000Z'
 ---
 [[Desert Rose]]
 

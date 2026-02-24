@@ -4,7 +4,7 @@ tags:
   - public
   - keyword
 created: '2023-01-18T15:54:12.000Z'
-updated: '2026-02-09T07:05:46.256Z'
+updated: '2026-02-09T07:05:46.000Z'
 ---
 
 ### 연결

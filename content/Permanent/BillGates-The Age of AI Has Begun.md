@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2023-03-25T01:39:06.000Z'
-updated: '2026-02-08T12:19:55.175Z'
+updated: '2026-02-08T12:19:55.000Z'
 ---
 [Article](https://www.gatesnotes.com/The-Age-of-AI-Has-Begun)
 [[Bill Gates]]

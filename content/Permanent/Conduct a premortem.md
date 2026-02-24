@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2024-06-25T15:04:10.000Z'
-updated: '2026-02-08T12:24:30.045Z'
+updated: '2026-02-08T12:24:30.000Z'
 ---
 [[Guy Kawasaki]]
 [[../Permanent/premortem|premortem]]

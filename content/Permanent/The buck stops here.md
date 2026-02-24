@@ -3,8 +3,8 @@ aliases:
   - 공은 여기서 멈춘다
 tags:
   - public
-created: '2026-02-21T14:27:40.565Z'
-updated: '2026-02-21T14:47:04.724Z'
+created: '2026-02-21T14:27:40.000Z'
+updated: '2026-02-21T14:47:04.000Z'
 ---
 the [[responsibility]] for something cannot or should not be passed to someone else.
 

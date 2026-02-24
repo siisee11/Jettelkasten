@@ -4,7 +4,7 @@ aliases:
 tags:
   - public
   - fleeting
-created: '2026-02-09T07:13:07.879Z'
+created: '2026-02-09T07:13:07.000Z'
 updated: '2026-02-22T09:20:09.000Z'
 ---
 [[bookshelf]]

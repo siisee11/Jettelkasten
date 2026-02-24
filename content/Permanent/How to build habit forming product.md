@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2024-02-08T00:56:30.000Z'
-updated: '2026-02-20T11:16:09.993Z'
+updated: '2026-02-20T11:16:09.000Z'
 ---
 [[Speech]]
 [[Nir Eyal]]

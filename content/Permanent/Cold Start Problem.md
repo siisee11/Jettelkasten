@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2024-02-08T00:53:16.000Z'
-updated: '2026-02-20T11:12:58.509Z'
+updated: '2026-02-20T11:12:58.000Z'
 ---
 [[bookshelf]] [[network effect]] 
 # The Cold Start Problem

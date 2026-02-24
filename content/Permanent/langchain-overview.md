@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2023-04-15T06:59:21.000Z'
-updated: '2026-02-08T13:36:45.073Z'
+updated: '2026-02-08T13:36:45.000Z'
 ---
 # 7 Pilars
 

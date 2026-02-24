@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2024-02-07T13:28:02.000Z'
-updated: '2026-02-08T10:50:53.856Z'
+updated: '2026-02-08T10:50:53.000Z'
 ---
 [[Speech|Speech]]
 https://youtu.be/NG8UPFr2FEo
