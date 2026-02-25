@@ -120,6 +120,16 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
     return buildDepthMap(graph, page.slug, 2);
   }, [graph, page]);
 
+  const categoryBacklinks = useMemo(() => {
+    if (!page || !page.tags.includes("category") || localGraph.nodes.length <= 1) return [] as Page[];
+
+    return localGraph.nodes
+      .filter((n) => n.id !== page.slug && (depthMap.get(n.id) ?? 2) === 1)
+      .map((n) => pages.find((p) => p.slug === (n.slug || n.id)))
+      .filter((p): p is Page => Boolean(p))
+      .sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
+  }, [depthMap, localGraph.nodes, page, pages]);
+
   const [graphSize, setGraphSize] = useState({ width: 720, height: 360 });
   useEffect(() => {
     const updateSize = () => {
@@ -158,15 +168,17 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
         <div className="aliases">Tags: {page.tags.filter((t) => t !== "public").join(", ")}</div>
       )}
       <div className="content" dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
-      {page.tags.includes("category") && localGraph.nodes.length > 1 && (
+      {page.tags.includes("category") && categoryBacklinks.length > 0 && (
         <div className="home-links left-align">
-          {localGraph.nodes
-            .filter((n) => n.id !== page.slug && (depthMap.get(n.id) ?? 2) === 1)
-            .map((n) => (
-              <Link key={n.id} to={`/${n.slug || n.id}`}>
-                {n.title || n.id}
-              </Link>
-            ))}
+          {categoryBacklinks.map((p) => {
+            const relativeDate = formatRelativeEnglish(p.createdAt ?? null);
+            return (
+              <div key={p.slug} className="post-list-item category-backlink-item">
+                <Link to={`/${p.slug}`}>{p.title}</Link>
+                {relativeDate && <span className="post-list-date">{relativeDate}</span>}
+              </div>
+            );
+          })}
         </div>
       )}
       {(page.tags.includes("keyword") || page.tags.includes("person") || page.tags.includes("category")) &&

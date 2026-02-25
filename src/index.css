@@ -90,6 +90,10 @@ body {
   gap: 8px;
 }
 
+.category-backlink-item {
+  justify-content: flex-start;
+}
+
 .post-list-date {
   font-size: 0.8em;
   color: #777;
