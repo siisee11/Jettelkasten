@@ -18,29 +18,29 @@ Reading, listening is fine. Speaking and writing is hard, and thinking is almost
 
 ---
 
-> "But when it comes to forming your own thought, it suddenly feels like a big wall stands in your way"
+	"But when it comes to forming your own thought, it suddenly feels like a big wall stands in your way"
 
 I learned to write, read, listen and speak, but I haven't learned how to think in English.
 
-> "The real secret to fluency is not just learning English words, but actually traininig your mind to think in English directly (without translation)"
+	"The real secret to fluency is not just learning English words, but actually traininig your mind to think in English directly (without translation)"
 
 ### How?
 
 Method1: Train your inner voice.
-> "When you wake up in the morning, instead of saying to yourself 'I need to brush my teeth' in your own language. Say it in English'.
+	"When you wake up in the morning, instead of saying to yourself 'I need to brush my teeth' in your own language. Say it in English'.
 
-> "If you are walking to school or work,  describe what you see around you in English"
+	"If you are walking to school or work,  describe what you see around you in English"
 
 
 Method2: Surround yourself with English sound and words.
 
 Method3: Visualization
 
-> "When you learn a new word, don't just connect it to translation in your language. Connect it directly to an image in your mind"
+	"When you learn a new word, don't just connect it to translation in your language. Connect it directly to an image in your mind"
 
 Method4: Emersion
 
-> "If possible, try to create situations where English it the only option."
+	"If possible, try to create situations where English it the only option."
 
 ---
 
