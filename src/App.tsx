@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Route, Routes, useParams, Link } from "react-router-dom";
 import About from "./About";
 import ForceGraph3D from "react-force-graph-3d";
+import SpriteText from "three-spritetext";
 import HomeSidebar from "./HomeSidebar";
 import SeoHead from "./SeoHead";
 
@@ -122,6 +123,50 @@ const nodeSizeFromDegree = (degree: number) => {
   return Math.min(12, 1 + degree * 0.8);
 };
 
+const LABEL_DISTANCE_THRESHOLD = 160;
+
+const buildNodeLabelSprite = (
+  node: { id: string; title?: string },
+  labelMap: Map<string, SpriteText>,
+) => {
+  const sprite = new SpriteText(node.title || node.id);
+  sprite.color = "#222";
+  sprite.backgroundColor = "rgba(255,255,255,0.9)";
+  sprite.padding = 2;
+  sprite.borderRadius = 2;
+  sprite.textHeight = 3.5;
+  sprite.position.set(0, 8, 0);
+  sprite.visible = false;
+  labelMap.set(node.id, sprite);
+  return sprite;
+};
+
+const updateLabelVisibilityByDistance = (
+  graphRef: any,
+  labelMap: Map<string, SpriteText>,
+  nodes: Array<{ id: string; x?: number; y?: number; z?: number }>,
+  threshold = LABEL_DISTANCE_THRESHOLD,
+) => {
+  const camera = graphRef?.camera?.();
+  if (!camera) return;
+
+  const cx = camera.position.x;
+  const cy = camera.position.y;
+  const cz = camera.position.z;
+
+  for (const node of nodes) {
+    const sprite = labelMap.get(node.id);
+    if (!sprite) continue;
+
+    const nx = node.x ?? 0;
+    const ny = node.y ?? 0;
+    const nz = node.z ?? 0;
+    const distance = Math.hypot(nx - cx, ny - cy, nz - cz);
+
+    sprite.visible = distance <= threshold;
+  }
+};
+
 const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) => {
   const params = useParams();
   const slug = params["*"] || "index";
@@ -151,6 +196,13 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
     () => buildDegreeMapFromLinks(localGraph.links as Array<{ source: any; target: any }>),
     [localGraph.links],
   );
+
+  const localGraphRef = useRef<any>(null);
+  const localLabelMapRef = useRef<Map<string, SpriteText>>(new Map());
+
+  useEffect(() => {
+    localLabelMapRef.current.clear();
+  }, [localGraph.nodes]);
 
   const [graphSize, setGraphSize] = useState({ width: 720, height: 360 });
   useEffect(() => {
@@ -207,9 +259,24 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
         localGraph.nodes.length > 1 && (
         <div className="graph">
           <ForceGraph3D
+            ref={localGraphRef}
             graphData={localGraph}
             nodeId="id"
             nodeLabel={(n: any) => n.title}
+            nodeThreeObject={(n: any) =>
+              buildNodeLabelSprite(
+                { id: n.id, title: n.title },
+                localLabelMapRef.current,
+              )
+            }
+            nodeThreeObjectExtend={true}
+            onEngineTick={() =>
+              updateLabelVisibilityByDistance(
+                localGraphRef.current,
+                localLabelMapRef.current,
+                localGraph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
+              )
+            }
             nodeVal={(n: any) => nodeSizeFromDegree(localDegreeMap.get(n.id) ?? 0)}
             nodeRelSize={4}
             width={graphSize.width}
@@ -329,14 +396,36 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     [graph.edges],
   );
 
+  const fullGraphRef = useRef<any>(null);
+  const fullLabelMapRef = useRef<Map<string, SpriteText>>(new Map());
+
+  useEffect(() => {
+    fullLabelMapRef.current.clear();
+  }, [graph.nodes]);
+
   return (
     <div className="page graph-page">
       <HomeSidebar pages={pages} />
       <div className="graph graph-fullscreen">
         <ForceGraph3D
+          ref={fullGraphRef}
           graphData={{ nodes: graph.nodes, links: graph.edges }}
           nodeId="id"
           nodeLabel={(n: any) => n.title}
+          nodeThreeObject={(n: any) =>
+            buildNodeLabelSprite(
+              { id: n.id, title: n.title },
+              fullLabelMapRef.current,
+            )
+          }
+          nodeThreeObjectExtend={true}
+          onEngineTick={() =>
+            updateLabelVisibilityByDistance(
+              fullGraphRef.current,
+              fullLabelMapRef.current,
+              graph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
+            )
+          }
           nodeVal={(n: any) => nodeSizeFromDegree(fullDegreeMap.get(n.id) ?? 0)}
           nodeRelSize={3}
           width={graphSize.width}
