@@ -303,12 +303,6 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
   return (
     <div className="page graph-page">
       <HomeSidebar pages={pages} />
-      <div className="graph-page-header">
-        <div className="top-nav">
-          <Link to="/">home/</Link>
-        </div>
-        <h1>Graph</h1>
-      </div>
       <div className="graph graph-fullscreen">
         <ForceGraph2D
           graphData={{ nodes: graph.nodes, links: graph.edges }}

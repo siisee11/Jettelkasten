@@ -167,24 +167,6 @@ h2 {
   overflow: hidden;
 }
 
-.graph-page-header {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 20;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 6px 8px;
-  border-radius: 6px;
-}
-
-.graph-page-header .top-nav {
-  margin-bottom: 4px;
-}
-
-.graph-page-header h1 {
-  margin: 0;
-}
-
 .graph-fullscreen {
   margin-top: 0;
   width: 100vw;
