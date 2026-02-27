@@ -290,15 +290,10 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
 };
 
 const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) => {
-  const [graphSize, setGraphSize] = useState({ width: 900, height: 520 });
+  const [graphSize, setGraphSize] = useState({ width: window.innerWidth, height: window.innerHeight });
   useEffect(() => {
     const updateSize = () => {
-      const isMobile = window.innerWidth <= 768;
-      const w = isMobile
-        ? Math.max(240, window.innerWidth - 48)
-        : Math.min(1200, Math.max(280, window.innerWidth - 120));
-      const h = Math.min(isMobile ? 520 : 700, Math.max(240, Math.floor(w * 0.6)));
-      setGraphSize({ width: w, height: h });
+      setGraphSize({ width: window.innerWidth, height: window.innerHeight });
     };
     updateSize();
     window.addEventListener("resize", updateSize);
@@ -306,13 +301,15 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
   }, []);
 
   return (
-    <div className="page">
+    <div className="page graph-page">
       <HomeSidebar pages={pages} />
-      <div className="top-nav">
-        <Link to="/">home/</Link>
+      <div className="graph-page-header">
+        <div className="top-nav">
+          <Link to="/">home/</Link>
+        </div>
+        <h1>Graph</h1>
       </div>
-      <h1>Graph</h1>
-      <div className="graph">
+      <div className="graph graph-fullscreen">
         <ForceGraph2D
           graphData={{ nodes: graph.nodes, links: graph.edges }}
           nodeId="id"
