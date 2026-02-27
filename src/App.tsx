@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Route, Routes, useParams, Link } from "react-router-dom";
 import About from "./About";
-import ForceGraph2D from "react-force-graph-2d";
+import ForceGraph3D from "react-force-graph-3d";
 import HomeSidebar from "./HomeSidebar";
 import SeoHead from "./SeoHead";
 
@@ -184,7 +184,7 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
       {(page.tags.includes("keyword") || page.tags.includes("person") || page.tags.includes("category")) &&
         localGraph.nodes.length > 1 && (
         <div className="graph">
-          <ForceGraph2D
+          <ForceGraph3D
             graphData={localGraph}
             nodeId="id"
             nodeLabel={(n: any) => n.title}
@@ -304,7 +304,7 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     <div className="page graph-page">
       <HomeSidebar pages={pages} />
       <div className="graph graph-fullscreen">
-        <ForceGraph2D
+        <ForceGraph3D
           graphData={{ nodes: graph.nodes, links: graph.edges }}
           nodeId="id"
           nodeLabel={(n: any) => n.title}
