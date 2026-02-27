@@ -123,7 +123,7 @@ const nodeSizeFromDegree = (degree: number) => {
   return Math.min(12, 1 + degree * 0.8);
 };
 
-const LABEL_DISTANCE_THRESHOLD = 160;
+const LABEL_DISTANCE_THRESHOLD = 200;
 
 const buildNodeLabelSprite = (
   node: { id: string; title?: string },
