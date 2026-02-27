@@ -191,6 +191,7 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
             nodeRelSize={4}
             width={graphSize.width}
             height={graphSize.height}
+            backgroundColor="#fff"
             linkColor={(l: any) => {
               const s = typeof l.source === "string" ? l.source : l.source?.id;
               const t = typeof l.target === "string" ? l.target : l.target?.id;
@@ -311,6 +312,7 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
           nodeRelSize={3}
           width={graphSize.width}
           height={graphSize.height}
+          backgroundColor="#fff"
           linkColor={() => "#777"}
           nodeColor={() => "#000"}
         />
