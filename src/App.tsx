@@ -105,6 +105,23 @@ const formatRelativeEnglish = (value?: string | null): string => {
   return rtf.format(Math.round(diffSeconds / (60 * 60 * 24 * 365)), "year");
 };
 
+const buildDegreeMapFromLinks = (links: Array<{ source: any; target: any }>) => {
+  const degrees = new Map<string, number>();
+  for (const link of links) {
+    const sourceId = typeof link.source === "string" ? link.source : link.source?.id;
+    const targetId = typeof link.target === "string" ? link.target : link.target?.id;
+
+    if (sourceId) degrees.set(sourceId, (degrees.get(sourceId) ?? 0) + 1);
+    if (targetId) degrees.set(targetId, (degrees.get(targetId) ?? 0) + 1);
+  }
+  return degrees;
+};
+
+const nodeSizeFromDegree = (degree: number) => {
+  if (degree <= 0) return 1;
+  return Math.min(12, 1 + degree * 0.8);
+};
+
 const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) => {
   const params = useParams();
   const slug = params["*"] || "index";
@@ -129,6 +146,11 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
       .filter((p): p is Page => Boolean(p))
       .sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
   }, [depthMap, localGraph.nodes, page, pages]);
+
+  const localDegreeMap = useMemo(
+    () => buildDegreeMapFromLinks(localGraph.links as Array<{ source: any; target: any }>),
+    [localGraph.links],
+  );
 
   const [graphSize, setGraphSize] = useState({ width: 720, height: 360 });
   useEffect(() => {
@@ -188,6 +210,7 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
             graphData={localGraph}
             nodeId="id"
             nodeLabel={(n: any) => n.title}
+            nodeVal={(n: any) => nodeSizeFromDegree(localDegreeMap.get(n.id) ?? 0)}
             nodeRelSize={4}
             width={graphSize.width}
             height={graphSize.height}
@@ -301,6 +324,11 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
+  const fullDegreeMap = useMemo(
+    () => buildDegreeMapFromLinks(graph.edges as Array<{ source: any; target: any }>),
+    [graph.edges],
+  );
+
   return (
     <div className="page graph-page">
       <HomeSidebar pages={pages} />
@@ -309,6 +337,7 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
           graphData={{ nodes: graph.nodes, links: graph.edges }}
           nodeId="id"
           nodeLabel={(n: any) => n.title}
+          nodeVal={(n: any) => nodeSizeFromDegree(fullDegreeMap.get(n.id) ?? 0)}
           nodeRelSize={3}
           width={graphSize.width}
           height={graphSize.height}
