@@ -246,17 +246,19 @@ const IndexList: React.FC<{ pages: Page[] }> = ({ pages }) => {
       </div>
       <div className="home-inner">
         <h1>Posts</h1>
-        <div className="home-links">
-          {list.map((p) => {
-            const postDate = p.createdAt ?? null;
-            const relativeDate = formatRelativeEnglish(postDate);
-            return (
-              <div key={p.slug} className="post-list-item">
-                {relativeDate && <span className="post-list-date">{relativeDate}</span>}
-                <Link to={`/${p.slug}`}>{p.title}</Link>
-              </div>
-            );
-          })}
+        <div className="list-scroll">
+          <div className="home-links">
+            {list.map((p) => {
+              const postDate = p.createdAt ?? null;
+              const relativeDate = formatRelativeEnglish(postDate);
+              return (
+                <div key={p.slug} className="post-list-item">
+                  {relativeDate && <span className="post-list-date">{relativeDate}</span>}
+                  <Link to={`/${p.slug}`}>{p.title}</Link>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
@@ -273,12 +275,14 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
       </div>
       <div className="home-inner">
         <h1>Keywords</h1>
-        <div className="home-links">
-          {list.map((p) => (
-            <div key={p.slug}>
-              <Link to={`/${p.slug}`}>{p.title}</Link>
-            </div>
-          ))}
+        <div className="list-scroll">
+          <div className="home-links">
+            {list.map((p) => (
+              <div key={p.slug}>
+                <Link to={`/${p.slug}`}>{p.title}</Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -35,6 +35,18 @@ body {
   text-align: right;
 }
 
+.list-scroll {
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .list-scroll {
+    max-height: calc(100vh - 110px);
+  }
+}
+
 .home-sidebar {
   text-align: right;
   position: relative;
