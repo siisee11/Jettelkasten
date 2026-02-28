@@ -126,6 +126,7 @@ const nodeSizeFromDegree = (degree: number) => {
 const LABEL_SHOW_DISTANCE = 600;
 const LABEL_FULL_OPACITY_DISTANCE = 400;
 const LABEL_MIN_OPACITY = 0.1;
+const NODE_INTERACTIVE_DISTANCE = 400;
 
 const buildNodeLabelSprite = (
   node: { id: string; title?: string },
@@ -147,6 +148,35 @@ const buildNodeLabelSprite = (
   return sprite;
 };
 
+const getNodeDistanceFromCamera = (
+  graphRef: any,
+  node?: { x?: number; y?: number; z?: number } | null,
+): number | null => {
+  if (!node) return null;
+  const camera = graphRef?.camera?.();
+  if (!camera) return null;
+
+  const cx = camera.position.x;
+  const cy = camera.position.y;
+  const cz = camera.position.z;
+
+  const nx = node.x ?? 0;
+  const ny = node.y ?? 0;
+  const nz = node.z ?? 0;
+
+  return Math.hypot(nx - cx, ny - cy, nz - cz);
+};
+
+const isNodeInteractiveByDistance = (
+  graphRef: any,
+  node?: { x?: number; y?: number; z?: number } | null,
+  threshold = NODE_INTERACTIVE_DISTANCE,
+) => {
+  const distance = getNodeDistanceFromCamera(graphRef, node);
+  if (distance === null) return false;
+  return distance <= threshold;
+};
+
 const updateLabelVisibilityByDistance = (
   graphRef: any,
   labelMap: Map<string, SpriteText>,
@@ -155,21 +185,12 @@ const updateLabelVisibilityByDistance = (
   fullOpacityDistance = LABEL_FULL_OPACITY_DISTANCE,
   minOpacity = LABEL_MIN_OPACITY,
 ) => {
-  const camera = graphRef?.camera?.();
-  if (!camera) return;
-
-  const cx = camera.position.x;
-  const cy = camera.position.y;
-  const cz = camera.position.z;
-
   for (const node of nodes) {
     const sprite = labelMap.get(node.id);
     if (!sprite || !sprite.material) continue;
 
-    const nx = node.x ?? 0;
-    const ny = node.y ?? 0;
-    const nz = node.z ?? 0;
-    const distance = Math.hypot(nx - cx, ny - cy, nz - cz);
+    const distance = getNodeDistanceFromCamera(graphRef, node);
+    if (distance === null) continue;
 
     if (distance > showDistance) {
       sprite.visible = false;
@@ -226,6 +247,12 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
   useEffect(() => {
     localLabelMapRef.current.clear();
   }, [localGraph.nodes]);
+
+  useEffect(() => {
+    return () => {
+      document.body.style.cursor = "default";
+    };
+  }, []);
 
   const [graphSize, setGraphSize] = useState({ width: 720, height: 360 });
   useEffect(() => {
@@ -300,6 +327,10 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
                 localGraph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
               )
             }
+            onNodeHover={(node: any) => {
+              const isInteractive = isNodeInteractiveByDistance(localGraphRef.current, node);
+              document.body.style.cursor = isInteractive ? "pointer" : "default";
+            }}
             nodeVal={(n: any) => nodeSizeFromDegree(localDegreeMap.get(n.id) ?? 0)}
             nodeRelSize={4}
             width={graphSize.width}
@@ -426,6 +457,12 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     fullLabelMapRef.current.clear();
   }, [graph.nodes]);
 
+  useEffect(() => {
+    return () => {
+      document.body.style.cursor = "default";
+    };
+  }, []);
+
   return (
     <div className="page graph-page">
       <HomeSidebar pages={pages} className="show-mobile" />
@@ -449,6 +486,10 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
               graph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
             )
           }
+          onNodeHover={(node: any) => {
+            const isInteractive = isNodeInteractiveByDistance(fullGraphRef.current, node);
+            document.body.style.cursor = isInteractive ? "pointer" : "default";
+          }}
           nodeVal={(n: any) => nodeSizeFromDegree(fullDegreeMap.get(n.id) ?? 0)}
           nodeRelSize={3}
           width={graphSize.width}
