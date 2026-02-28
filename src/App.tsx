@@ -5,6 +5,7 @@ import ForceGraph3D from "react-force-graph-3d";
 import SpriteText from "three-spritetext";
 import HomeSidebar from "./HomeSidebar";
 import SeoHead from "./SeoHead";
+import HandGestureOverlay from "./HandGestureOverlay";
 
 type Page = {
   slug: string;
@@ -520,6 +521,7 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
           nodeColor={() => "#000"}
         />
       </div>
+      <HandGestureOverlay />
     </div>
   );
 };
