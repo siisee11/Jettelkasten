@@ -428,7 +428,7 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
 
   return (
     <div className="page graph-page">
-      <HomeSidebar pages={pages} />
+      <HomeSidebar pages={pages} className="show-mobile" />
       <div className="graph graph-fullscreen">
         <ForceGraph3D
           ref={fullGraphRef}
