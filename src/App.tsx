@@ -123,7 +123,9 @@ const nodeSizeFromDegree = (degree: number) => {
   return Math.min(12, 1 + degree * 0.8);
 };
 
-const LABEL_DISTANCE_THRESHOLD = 500;
+const LABEL_SHOW_DISTANCE = 600;
+const LABEL_FULL_OPACITY_DISTANCE = 400;
+const LABEL_MIN_OPACITY = 0.1;
 
 const buildNodeLabelSprite = (
   node: { id: string; title?: string },
@@ -137,6 +139,10 @@ const buildNodeLabelSprite = (
   sprite.textHeight = 3.5;
   sprite.position.set(0, 8, 0);
   sprite.visible = false;
+  if (sprite.material) {
+    sprite.material.transparent = true;
+    sprite.material.opacity = 0;
+  }
   labelMap.set(node.id, sprite);
   return sprite;
 };
@@ -145,7 +151,9 @@ const updateLabelVisibilityByDistance = (
   graphRef: any,
   labelMap: Map<string, SpriteText>,
   nodes: Array<{ id: string; x?: number; y?: number; z?: number }>,
-  threshold = LABEL_DISTANCE_THRESHOLD,
+  showDistance = LABEL_SHOW_DISTANCE,
+  fullOpacityDistance = LABEL_FULL_OPACITY_DISTANCE,
+  minOpacity = LABEL_MIN_OPACITY,
 ) => {
   const camera = graphRef?.camera?.();
   if (!camera) return;
@@ -156,14 +164,29 @@ const updateLabelVisibilityByDistance = (
 
   for (const node of nodes) {
     const sprite = labelMap.get(node.id);
-    if (!sprite) continue;
+    if (!sprite || !sprite.material) continue;
 
     const nx = node.x ?? 0;
     const ny = node.y ?? 0;
     const nz = node.z ?? 0;
     const distance = Math.hypot(nx - cx, ny - cy, nz - cz);
 
-    sprite.visible = distance <= threshold;
+    if (distance > showDistance) {
+      sprite.visible = false;
+      sprite.material.opacity = 0;
+      continue;
+    }
+
+    sprite.visible = true;
+
+    if (distance <= fullOpacityDistance) {
+      sprite.material.opacity = 1;
+      continue;
+    }
+
+    const t = (showDistance - distance) / (showDistance - fullOpacityDistance);
+    const opacity = minOpacity + Math.max(0, Math.min(1, t)) * (1 - minOpacity);
+    sprite.material.opacity = opacity;
   }
 };
 
