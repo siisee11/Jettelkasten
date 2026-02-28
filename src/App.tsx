@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Route, Routes, useParams, Link } from "react-router-dom";
+import { Route, Routes, useParams, Link, useNavigate } from "react-router-dom";
 import About from "./About";
 import ForceGraph3D from "react-force-graph-3d";
 import SpriteText from "three-spritetext";
@@ -177,6 +177,13 @@ const isNodeInteractiveByDistance = (
   return distance <= threshold;
 };
 
+const getNodeRoutePath = (node: any): string | null => {
+  const slug = node?.slug || node?.id;
+  if (!slug) return null;
+  if (slug === "index") return "/";
+  return `/${slug}`;
+};
+
 const updateLabelVisibilityByDistance = (
   graphRef: any,
   labelMap: Map<string, SpriteText>,
@@ -213,6 +220,7 @@ const updateLabelVisibilityByDistance = (
 
 const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) => {
   const params = useParams();
+  const navigate = useNavigate();
   const slug = params["*"] || "index";
   const page = pages.find((p) => p.slug === slug);
 
@@ -331,6 +339,12 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
               const isInteractive = isNodeInteractiveByDistance(localGraphRef.current, node);
               document.body.style.cursor = isInteractive ? "pointer" : "default";
             }}
+            onNodeClick={(node: any) => {
+              if (!isNodeInteractiveByDistance(localGraphRef.current, node)) return;
+              const path = getNodeRoutePath(node);
+              if (!path) return;
+              navigate(path);
+            }}
             nodeVal={(n: any) => nodeSizeFromDegree(localDegreeMap.get(n.id) ?? 0)}
             nodeRelSize={4}
             width={graphSize.width}
@@ -435,6 +449,7 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
 };
 
 const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) => {
+  const navigate = useNavigate();
   const [graphSize, setGraphSize] = useState({ width: window.innerWidth, height: window.innerHeight });
   useEffect(() => {
     const updateSize = () => {
@@ -489,6 +504,12 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
           onNodeHover={(node: any) => {
             const isInteractive = isNodeInteractiveByDistance(fullGraphRef.current, node);
             document.body.style.cursor = isInteractive ? "pointer" : "default";
+          }}
+          onNodeClick={(node: any) => {
+            if (!isNodeInteractiveByDistance(fullGraphRef.current, node)) return;
+            const path = getNodeRoutePath(node);
+            if (!path) return;
+            navigate(path);
           }}
           nodeVal={(n: any) => nodeSizeFromDegree(fullDegreeMap.get(n.id) ?? 0)}
           nodeRelSize={3}
