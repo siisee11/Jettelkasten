@@ -6,7 +6,8 @@ import {
   type HandLandmarkerResult,
 } from "@mediapipe/tasks-vision";
 
-const WASM_PATH = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm";
+const TASKS_VERSION = "0.10.0";
+const WASM_PATH = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${TASKS_VERSION}/wasm`;
 const MODEL_PATH =
   "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task";
 
@@ -15,7 +16,6 @@ export default function HandGestureOverlay() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const handLandmarkerRef = useRef<HandLandmarker | null>(null);
   const animationRef = useRef<number | null>(null);
-  const lastVideoTimeRef = useRef(-1);
   const lastHandTextRef = useRef("");
 
   const [status, setStatus] = useState("Initializing hand tracker...");
@@ -60,11 +60,7 @@ export default function HandGestureOverlay() {
       context.clearRect(0, 0, width, height);
       context.drawImage(video, 0, 0, width, height);
 
-      let result: HandLandmarkerResult | null = null;
-      if (video.currentTime !== lastVideoTimeRef.current) {
-        result = handLandmarker.detectForVideo(video, performance.now());
-        lastVideoTimeRef.current = video.currentTime;
-      }
+      const result: HandLandmarkerResult = handLandmarker.detectForVideo(video, performance.now());
 
       if (result) {
         const drawingUtils = new DrawingUtils(context);
@@ -99,6 +95,8 @@ export default function HandGestureOverlay() {
       animationRef.current = requestAnimationFrame(render);
     };
 
+    let onLoadedData: (() => void) | null = null;
+
     const init = async () => {
       try {
         if (!navigator.mediaDevices?.getUserMedia) {
@@ -109,25 +107,36 @@ export default function HandGestureOverlay() {
         const vision = await FilesetResolver.forVisionTasks(WASM_PATH);
         if (!active) return;
 
-        handLandmarkerRef.current = await HandLandmarker.createFromOptions(vision, {
-          baseOptions: {
-            modelAssetPath: MODEL_PATH,
-          },
-          runningMode: "VIDEO",
-          numHands: 2,
-          minHandDetectionConfidence: 0.5,
-          minHandPresenceConfidence: 0.5,
-          minTrackingConfidence: 0.5,
-        });
+        try {
+          handLandmarkerRef.current = await HandLandmarker.createFromOptions(vision, {
+            baseOptions: {
+              modelAssetPath: MODEL_PATH,
+              delegate: "GPU",
+            },
+            runningMode: "VIDEO",
+            numHands: 2,
+            minHandDetectionConfidence: 0.5,
+            minHandPresenceConfidence: 0.5,
+            minTrackingConfidence: 0.5,
+          });
+        } catch (gpuError) {
+          console.warn("GPU delegate unavailable, falling back to CPU", gpuError);
+          handLandmarkerRef.current = await HandLandmarker.createFromOptions(vision, {
+            baseOptions: {
+              modelAssetPath: MODEL_PATH,
+            },
+            runningMode: "VIDEO",
+            numHands: 2,
+            minHandDetectionConfidence: 0.5,
+            minHandPresenceConfidence: 0.5,
+            minTrackingConfidence: 0.5,
+          });
+        }
 
         if (!active) return;
 
         stream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            width: { ideal: 320 },
-            height: { ideal: 240 },
-            facingMode: "user",
-          },
+          video: true,
           audio: false,
         });
 
@@ -139,10 +148,21 @@ export default function HandGestureOverlay() {
         const video = videoRef.current;
         if (!video) return;
         video.srcObject = stream;
-        await video.play();
 
-        setStatus("Hand tracking live");
-        animationRef.current = requestAnimationFrame(render);
+        const startRender = () => {
+          if (!active) return;
+          setStatus("Hand tracking live");
+          if (animationRef.current === null) {
+            animationRef.current = requestAnimationFrame(render);
+          }
+        };
+        onLoadedData = startRender;
+        video.addEventListener("loadeddata", startRender);
+
+        await video.play();
+        if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+          startRender();
+        }
       } catch (error) {
         console.error(error);
         setStatus("Failed to start hand tracker");
@@ -158,8 +178,17 @@ export default function HandGestureOverlay() {
         cancelAnimationFrame(animationRef.current);
       }
 
+      const video = videoRef.current;
+      if (video && onLoadedData) {
+        video.removeEventListener("loadeddata", onLoadedData);
+      }
+
       if (stream) {
         stream.getTracks().forEach((track) => track.stop());
+      }
+
+      if (video) {
+        video.srcObject = null;
       }
 
       handLandmarkerRef.current = null;
