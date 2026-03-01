@@ -357,7 +357,6 @@ export default function HandGestureOverlay({
 
       context.save();
       context.clearRect(0, 0, width, height);
-      context.drawImage(video, 0, 0, width, height);
 
       const result: HandLandmarkerResult = handLandmarker.detectForVideo(video, performance.now());
       const now = performance.now();
@@ -365,10 +364,6 @@ export default function HandGestureOverlay({
       if (result) {
         const drawingUtils = new DrawingUtils(context);
         for (const landmarks of result.landmarks ?? []) {
-          drawingUtils.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS, {
-            color: "#00E676",
-            lineWidth: 2,
-          });
           drawingUtils.drawLandmarks(landmarks, {
             color: "#FF5252",
             lineWidth: 1,
