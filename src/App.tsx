@@ -453,7 +453,6 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
 const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) => {
   const navigate = useNavigate();
   const [graphSize, setGraphSize] = useState({ width: window.innerWidth, height: window.innerHeight });
-  const [gestureHoveredNodeId, setGestureHoveredNodeId] = useState<string | null>(null);
   const [gestureSelectedNodeId, setGestureSelectedNodeId] = useState<string | null>(null);
   useEffect(() => {
     const updateSize = () => {
@@ -468,6 +467,10 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     () => buildDegreeMapFromLinks(graph.edges as Array<{ source: any; target: any }>),
     [graph.edges],
   );
+  const fullGraphData = useMemo(
+    () => ({ nodes: graph.nodes, links: graph.edges }),
+    [graph.nodes, graph.edges],
+  );
 
   const fullGraphRef = useRef<any>(null);
   const fullLabelMapRef = useRef<Map<string, SpriteText>>(new Map());
@@ -481,6 +484,14 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     return () => {
       document.body.style.cursor = "default";
     };
+  }, []);
+
+  useEffect(() => {
+    const graphInstance = fullGraphRef.current;
+    const renderer = graphInstance?.renderer?.();
+    if (!renderer) return;
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25);
+    renderer.setPixelRatio(pixelRatio);
   }, []);
 
   const getNodeAtScreenPoint = useCallback(
@@ -566,7 +577,7 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
       <div className="graph graph-fullscreen">
         <ForceGraph3D
           ref={fullGraphRef}
-          graphData={{ nodes: graph.nodes, links: graph.edges }}
+          graphData={fullGraphData}
           nodeId="id"
           nodeLabel={(n: any) => n.title}
           nodeThreeObject={(n: any) =>
@@ -586,7 +597,6 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
           onNodeHover={(node: any) => {
             const isInteractive = isNodeInteractiveByDistance(fullGraphRef.current, node);
             document.body.style.cursor = isInteractive ? "pointer" : "default";
-            setGestureHoveredNodeId(node?.id ?? null);
           }}
           onNodeClick={(node: any) => {
             if (!isNodeInteractiveByDistance(fullGraphRef.current, node)) return;
@@ -599,10 +609,16 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
           width={graphSize.width}
           height={graphSize.height}
           backgroundColor="#fff"
+          rendererConfig={{ antialias: false, powerPreference: "high-performance" }}
+          cooldownTicks={80}
+          warmupTicks={30}
+          d3AlphaDecay={0.08}
+          d3VelocityDecay={0.5}
+          enableNodeDrag={false}
+          showNavInfo={false}
           linkColor={() => "#777"}
           nodeColor={(node: any) => {
             if (node.id === gestureSelectedNodeId) return "#0f766e";
-            if (node.id === gestureHoveredNodeId) return "#1d4ed8";
             return "#000";
           }}
         />
@@ -611,7 +627,6 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
         graphRef={fullGraphRef}
         getNodeAtScreenPoint={getNodeAtScreenPoint}
         onOpenNode={openNodeFromGesture}
-        onHoverNode={(node) => setGestureHoveredNodeId(node?.id ?? null)}
         onSelectNode={(node) => setGestureSelectedNodeId(node?.id ?? null)}
         onRecenter={recenterGraphCamera}
         selectedNodeId={gestureSelectedNodeId}
