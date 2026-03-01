@@ -139,7 +139,7 @@ const zoomCamera = (graphRef: React.MutableRefObject<any>, distanceDelta: number
   const currentDistance = offset.length();
   if (!currentDistance) return;
 
-  const factor = clamp(1 + distanceDelta * 2.4, 0.85, 1.2);
+  const factor = clamp(1 - distanceDelta * 2.4, 0.85, 1.2);
   const nextDistance = clamp(currentDistance * factor, 35, 2500);
   offset.setLength(nextDistance);
   camera.position.copy(target.clone().add(offset));
