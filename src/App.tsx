@@ -125,10 +125,12 @@ const nodeSizeFromDegree = (degree: number) => {
   return Math.min(12, 1 + degree * 0.8);
 };
 
-const LABEL_SHOW_DISTANCE = 600;
+const LABEL_DISTANCE_THRESHOLD = 600;
+const LABEL_SHOW_DISTANCE = LABEL_DISTANCE_THRESHOLD;
 const LABEL_FULL_OPACITY_DISTANCE = 400;
 const LABEL_MIN_OPACITY = 0.1;
 const NODE_INTERACTIVE_DISTANCE = 400;
+const CAMERA_CHANGE_EPSILON = 0.05;
 
 const buildNodeLabelSprite = (
   node: { id: string; title?: string },
@@ -220,6 +222,55 @@ const updateLabelVisibilityByDistance = (
   }
 };
 
+const useLabelVisibilityUpdater = (
+  graphRef: React.MutableRefObject<any>,
+  labelMapRef: React.MutableRefObject<Map<string, SpriteText>>,
+  nodes: Array<{ id: string; x?: number; y?: number; z?: number }>,
+) => {
+  useEffect(() => {
+    let rafId = 0;
+    let active = true;
+    let lastCameraState: [number, number, number, number, number, number] | null = null;
+
+    const tick = () => {
+      if (!active) return;
+
+      const graph = graphRef.current;
+      const camera = graph?.camera?.();
+      const controls = graph?.controls?.();
+      const target = controls?.target;
+
+      if (camera && target) {
+        const currentState: [number, number, number, number, number, number] = [
+          camera.position.x,
+          camera.position.y,
+          camera.position.z,
+          target.x,
+          target.y,
+          target.z,
+        ];
+
+        const cameraMoved =
+          !lastCameraState ||
+          currentState.some((value, index) => Math.abs(value - lastCameraState![index]) > CAMERA_CHANGE_EPSILON);
+
+        if (cameraMoved) {
+          updateLabelVisibilityByDistance(graph, labelMapRef.current, nodes);
+          lastCameraState = currentState;
+        }
+      }
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => {
+      active = false;
+      cancelAnimationFrame(rafId);
+    };
+  }, [graphRef, labelMapRef, nodes]);
+};
+
 const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) => {
   const params = useParams();
   const navigate = useNavigate();
@@ -263,6 +314,11 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
       document.body.style.cursor = "default";
     };
   }, []);
+  useLabelVisibilityUpdater(
+    localGraphRef,
+    localLabelMapRef,
+    localGraph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
+  );
 
   const [graphSize, setGraphSize] = useState({ width: 720, height: 360 });
   useEffect(() => {
@@ -330,13 +386,6 @@ const PageView: React.FC<{ pages: Page[]; graph: Graph }> = ({ pages, graph }) =
               )
             }
             nodeThreeObjectExtend={true}
-            onEngineTick={() =>
-              updateLabelVisibilityByDistance(
-                localGraphRef.current,
-                localLabelMapRef.current,
-                localGraph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
-              )
-            }
             onNodeHover={(node: any) => {
               const isInteractive = isNodeInteractiveByDistance(localGraphRef.current, node);
               document.body.style.cursor = isInteractive ? "pointer" : "default";
@@ -485,6 +534,11 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
       document.body.style.cursor = "default";
     };
   }, []);
+  useLabelVisibilityUpdater(
+    fullGraphRef,
+    fullLabelMapRef,
+    graph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
+  );
 
   useEffect(() => {
     const graphInstance = fullGraphRef.current;
@@ -587,13 +641,6 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
             )
           }
           nodeThreeObjectExtend={true}
-          onEngineTick={() =>
-            updateLabelVisibilityByDistance(
-              fullGraphRef.current,
-              fullLabelMapRef.current,
-              graph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
-            )
-          }
           onNodeHover={(node: any) => {
             const isInteractive = isNodeInteractiveByDistance(fullGraphRef.current, node);
             document.body.style.cursor = isInteractive ? "pointer" : "default";
