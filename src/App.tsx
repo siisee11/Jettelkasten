@@ -134,7 +134,6 @@ const CAMERA_CHANGE_EPSILON = 0.05;
 
 const GESTURE_ORBIT_SPEED = 2.4;
 const GESTURE_ZOOM_SPEED = 2.2;
-const GESTURE_PAN_SPEED = 0.9;
 const GESTURE_MIN_CAMERA_DISTANCE = 30;
 const GESTURE_MAX_CAMERA_DISTANCE = 1600;
 
@@ -615,31 +614,6 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     applyCameraState(nextCameraPosition, current.lookAt);
   };
 
-  const panCameraByGesture = (dx: number, dy: number) => {
-    if (!dx && !dy) return;
-    const current = getCameraAndLookAt();
-    if (!current) return;
-
-    const viewDirection = current.lookAt.clone().sub(current.camera.position);
-    const viewDistance = Math.max(viewDirection.length(), 1);
-    const forward = viewDirection.normalize();
-
-    let right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0, 1, 0));
-    if (right.lengthSq() < 1e-6) {
-      right = new THREE.Vector3(1, 0, 0);
-    }
-    right.normalize();
-
-    const up = new THREE.Vector3().crossVectors(right, forward).normalize();
-    const panScale = Math.max(1, viewDistance * GESTURE_PAN_SPEED);
-
-    const offset = right.multiplyScalar(-dx * panScale).add(up.multiplyScalar(dy * panScale));
-    const nextCameraPosition = current.camera.position.clone().add(offset);
-    const nextLookAt = current.lookAt.clone().add(offset);
-
-    applyCameraState(nextCameraPosition, nextLookAt);
-  };
-
   const handleGestureControl = (event: GestureControlEvent) => {
     if (event.mode === "orbit") {
       orbitCameraByGesture(event.deltaX ?? 0, event.deltaY ?? 0);
@@ -651,11 +625,6 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
 
     if (event.mode === "zoom") {
       zoomCameraByGesture(event.zoomDelta ?? 0);
-      return;
-    }
-
-    if (event.mode === "pan") {
-      panCameraByGesture(event.deltaX ?? 0, event.deltaY ?? 0);
     }
   };
 

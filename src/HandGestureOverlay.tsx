@@ -20,7 +20,7 @@ const MOTION_LIMIT = 0.06;
 const TWIST_TO_ORBIT_SCALE = 0.45;
 const SHOW_CAMERA_FEED = false;
 
-type GestureMode = "idle" | "orbit" | "zoom" | "pan";
+type GestureMode = "idle" | "orbit" | "zoom";
 
 export type GestureControlEvent = {
   mode: GestureMode;
@@ -42,41 +42,6 @@ const clampMagnitude = (value: number, maxAbs = MOTION_LIMIT) =>
 
 const applyDeadzone = (value: number, deadzone: number) =>
   Math.abs(value) < deadzone ? 0 : clampMagnitude(value);
-
-const fingerExtended = (
-  landmarks: Landmark[],
-  tipIndex: number,
-  pipIndex: number,
-  mcpIndex: number,
-  wristIndex = 0,
-) => {
-  const tip = landmarks[tipIndex];
-  const pip = landmarks[pipIndex];
-  const mcp = landmarks[mcpIndex];
-  const wrist = landmarks[wristIndex];
-  if (!tip || !pip || !mcp || !wrist) return false;
-
-  const tipToWrist = distance2D(tip, wrist);
-  const pipToWrist = distance2D(pip, wrist);
-  const mcpToWrist = distance2D(mcp, wrist);
-
-  return tipToWrist > pipToWrist * 1.02 && pipToWrist >= mcpToWrist * 0.98;
-};
-
-const countExtendedFingers = (landmarks: Landmark[]) => {
-  const fingers: Array<[number, number, number]> = [
-    [4, 3, 2],
-    [8, 6, 5],
-    [12, 10, 9],
-    [16, 14, 13],
-    [20, 18, 17],
-  ];
-
-  return fingers.reduce(
-    (count, [tip, pip, mcp]) => (fingerExtended(landmarks, tip, pip, mcp) ? count + 1 : count),
-    0,
-  );
-};
 
 const isPinch = (landmarks: Landmark[]) => {
   const thumbTip = landmarks[4];
@@ -101,8 +66,6 @@ const modeLabel = (mode: GestureMode) => {
       return "Orbit";
     case "zoom":
       return "Zoom";
-    case "pan":
-      return "Pan";
     default:
       return "Idle";
   }
@@ -117,7 +80,6 @@ export default function HandGestureOverlay({ onControl }: Props) {
 
   const lastModeRef = useRef<GestureMode>("idle");
   const prevOrbitPointRef = useRef<{ x: number; y: number } | null>(null);
-  const prevPanPointRef = useRef<{ x: number; y: number } | null>(null);
   const prevZoomDistanceRef = useRef<number | null>(null);
   const prevTwoHandAngleRef = useRef<number | null>(null);
 
@@ -130,7 +92,6 @@ export default function HandGestureOverlay({ onControl }: Props) {
 
     const resetMotionRefs = () => {
       prevOrbitPointRef.current = null;
-      prevPanPointRef.current = null;
       prevZoomDistanceRef.current = null;
       prevTwoHandAngleRef.current = null;
     };
@@ -189,10 +150,7 @@ export default function HandGestureOverlay({ onControl }: Props) {
       }
 
       const hand = landmarksList[0];
-      const wrist = hand[0];
       const pinch = isPinch(hand);
-      const extendedCount = countExtendedFingers(hand);
-      const fist = extendedCount <= 1;
 
       if (pinch) {
         const center = pinchCenter(hand);
@@ -204,16 +162,6 @@ export default function HandGestureOverlay({ onControl }: Props) {
         const deltaX = applyDeadzone(center.x - prev.x, MOTION_DEADZONE);
         const deltaY = applyDeadzone(center.y - prev.y, MOTION_DEADZONE);
         return { mode: "orbit", deltaX, deltaY };
-      }
-
-      if (fist && wrist) {
-        const prev = prevPanPointRef.current;
-        prevPanPointRef.current = { x: wrist.x, y: wrist.y };
-        if (!prev) return { mode: "pan", deltaX: 0, deltaY: 0 };
-
-        const deltaX = applyDeadzone(wrist.x - prev.x, MOTION_DEADZONE);
-        const deltaY = applyDeadzone(wrist.y - prev.y, MOTION_DEADZONE);
-        return { mode: "pan", deltaX, deltaY };
       }
 
       return { mode: "idle" };
