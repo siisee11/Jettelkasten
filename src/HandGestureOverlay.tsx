@@ -5,6 +5,7 @@ import {
   HandLandmarker,
   type HandLandmarkerResult,
 } from "@mediapipe/tasks-vision";
+import { getClosenessDelta } from "./handGestureMath";
 
 const TASKS_VERSION = "0.10.0";
 const WASM_PATH = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${TASKS_VERSION}/wasm`;
@@ -15,6 +16,7 @@ const PINCH_THRESHOLD = 0.08;
 const MOTION_DEADZONE = 0.0015;
 const ZOOM_DEADZONE = 0.002;
 const MOTION_LIMIT = 0.06;
+const SHOW_CAMERA_FEED = false;
 
 type GestureMode = "idle" | "orbit" | "zoom" | "pan";
 
@@ -61,11 +63,11 @@ const fingerExtended = (
 
 const countExtendedFingers = (landmarks: Landmark[]) => {
   const fingers: Array<[number, number, number]> = [
-    [4, 3, 2], // thumb
-    [8, 6, 5], // index
-    [12, 10, 9], // middle
-    [16, 14, 13], // ring
-    [20, 18, 17], // pinky
+    [4, 3, 2],
+    [8, 6, 5],
+    [12, 10, 9],
+    [16, 14, 13],
+    [20, 18, 17],
   ];
 
   return fingers.reduce(
@@ -154,7 +156,7 @@ export default function HandGestureOverlay({ onControl }: Props) {
             prevZoomDistanceRef.current = dist;
 
             if (prevDist !== null) {
-              const raw = dist - prevDist;
+              const raw = getClosenessDelta(prevDist, dist);
               const zoomDelta = applyDeadzone(raw, ZOOM_DEADZONE);
               if (zoomDelta !== 0) {
                 return { mode: "zoom", zoomDelta };
@@ -229,7 +231,9 @@ export default function HandGestureOverlay({ onControl }: Props) {
 
       context.save();
       context.clearRect(0, 0, width, height);
-      context.drawImage(video, 0, 0, width, height);
+      if (SHOW_CAMERA_FEED) {
+        context.drawImage(video, 0, 0, width, height);
+      }
 
       const result: HandLandmarkerResult = handLandmarker.detectForVideo(video, performance.now());
       const landmarksList = (result.landmarks ?? []) as Landmark[][];
@@ -238,10 +242,6 @@ export default function HandGestureOverlay({ onControl }: Props) {
 
       const drawingUtils = new DrawingUtils(context);
       for (const landmarks of landmarksList) {
-        drawingUtils.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS, {
-          color: "#00E676",
-          lineWidth: 2,
-        });
         drawingUtils.drawLandmarks(landmarks, {
           color: "#FF5252",
           lineWidth: 1,
