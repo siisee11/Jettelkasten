@@ -5,7 +5,7 @@ import {
   HandLandmarker,
   type HandLandmarkerResult,
 } from "@mediapipe/tasks-vision";
-import { getClosenessDelta } from "./handGestureMath";
+import { getAngleDelta, getClosenessDelta } from "./handGestureMath";
 
 const TASKS_VERSION = "0.10.0";
 const WASM_PATH = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${TASKS_VERSION}/wasm`;
@@ -15,7 +15,9 @@ const MODEL_PATH =
 const PINCH_THRESHOLD = 0.08;
 const MOTION_DEADZONE = 0.0015;
 const ZOOM_DEADZONE = 0.002;
+const TWIST_DEADZONE = 0.01;
 const MOTION_LIMIT = 0.06;
+const TWIST_TO_ORBIT_SCALE = 0.45;
 const SHOW_CAMERA_FEED = false;
 
 type GestureMode = "idle" | "orbit" | "zoom" | "pan";
@@ -117,6 +119,7 @@ export default function HandGestureOverlay({ onControl }: Props) {
   const prevOrbitPointRef = useRef<{ x: number; y: number } | null>(null);
   const prevPanPointRef = useRef<{ x: number; y: number } | null>(null);
   const prevZoomDistanceRef = useRef<number | null>(null);
+  const prevTwoHandAngleRef = useRef<number | null>(null);
 
   const [status, setStatus] = useState("Initializing hand tracker...");
   const [handText, setHandText] = useState("No hand detected · Idle");
@@ -129,6 +132,7 @@ export default function HandGestureOverlay({ onControl }: Props) {
       prevOrbitPointRef.current = null;
       prevPanPointRef.current = null;
       prevZoomDistanceRef.current = null;
+      prevTwoHandAngleRef.current = null;
     };
 
     const sendControl = (event: GestureControlEvent) => {
@@ -155,12 +159,29 @@ export default function HandGestureOverlay({ onControl }: Props) {
             const prevDist = prevZoomDistanceRef.current;
             prevZoomDistanceRef.current = dist;
 
+            const currentAngle = Math.atan2(centerB.y - centerA.y, centerB.x - centerA.x);
+            const prevAngle = prevTwoHandAngleRef.current;
+            prevTwoHandAngleRef.current = currentAngle;
+
+            let twistOrbitDelta = 0;
+            if (prevAngle !== null) {
+              const angleDelta = getAngleDelta(prevAngle, currentAngle);
+              twistOrbitDelta = applyDeadzone(angleDelta * TWIST_TO_ORBIT_SCALE, TWIST_DEADZONE);
+            }
+
+            let zoomDelta = 0;
+
             if (prevDist !== null) {
               const raw = getClosenessDelta(prevDist, dist);
-              const zoomDelta = applyDeadzone(raw, ZOOM_DEADZONE);
-              if (zoomDelta !== 0) {
-                return { mode: "zoom", zoomDelta };
-              }
+              zoomDelta = applyDeadzone(raw, ZOOM_DEADZONE);
+            }
+
+            if (twistOrbitDelta !== 0) {
+              return { mode: "orbit", deltaX: twistOrbitDelta, deltaY: 0, zoomDelta };
+            }
+
+            if (zoomDelta !== 0) {
+              return { mode: "zoom", zoomDelta };
             }
             return { mode: "zoom", zoomDelta: 0 };
           }

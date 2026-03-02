@@ -10,3 +10,12 @@ export const getZoomFactorFromCloseness = (
   maxFactor = 1.2,
 ) => clamp(1 + closenessDelta * sensitivity, minFactor, maxFactor);
 
+export const normalizeAngleDelta = (delta: number) => {
+  let normalized = delta;
+  while (normalized > Math.PI) normalized -= Math.PI * 2;
+  while (normalized < -Math.PI) normalized += Math.PI * 2;
+  return normalized;
+};
+
+export const getAngleDelta = (previousAngle: number, currentAngle: number) =>
+  normalizeAngleDelta(currentAngle - previousAngle);

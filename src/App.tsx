@@ -643,6 +643,9 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
   const handleGestureControl = (event: GestureControlEvent) => {
     if (event.mode === "orbit") {
       orbitCameraByGesture(event.deltaX ?? 0, event.deltaY ?? 0);
+      if (event.zoomDelta) {
+        zoomCameraByGesture(event.zoomDelta);
+      }
       return;
     }
 

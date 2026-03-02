@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { getClosenessDelta, getZoomFactorFromCloseness } from "./handGestureMath";
+import {
+  getAngleDelta,
+  getClosenessDelta,
+  getZoomFactorFromCloseness,
+  normalizeAngleDelta,
+} from "./handGestureMath";
 
 describe("hand gesture zoom math", () => {
   it("returns positive closeness delta when hands move closer", () => {
@@ -25,3 +30,15 @@ describe("hand gesture zoom math", () => {
   });
 });
 
+describe("hand gesture angle math", () => {
+  it("normalizes angle deltas to [-PI, PI]", () => {
+    expect(normalizeAngleDelta(Math.PI * 1.5)).toBeCloseTo(-Math.PI / 2, 8);
+    expect(normalizeAngleDelta(-Math.PI * 1.5)).toBeCloseTo(Math.PI / 2, 8);
+  });
+
+  it("returns shortest wrapped angle delta", () => {
+    const previous = Math.PI - 0.1;
+    const current = -Math.PI + 0.1;
+    expect(getAngleDelta(previous, current)).toBeCloseTo(0.2, 8);
+  });
+});
