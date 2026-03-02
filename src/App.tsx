@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Route, Routes, useParams, Link, useNavigate } from "react-router-dom";
 import About from "./About";
 import ForceGraph3D from "react-force-graph-3d";
@@ -6,7 +6,7 @@ import SpriteText from "three-spritetext";
 import * as THREE from "three";
 import HomeSidebar from "./HomeSidebar";
 import SeoHead from "./SeoHead";
-import HandGestureOverlay from "./HandGestureOverlay";
+import HandGestureOverlay, { type GestureControlEvent } from "./HandGestureOverlay";
 
 type Page = {
   slug: string;
@@ -131,6 +131,12 @@ const LABEL_FULL_OPACITY_DISTANCE = 400;
 const LABEL_MIN_OPACITY = 0.1;
 const NODE_INTERACTIVE_DISTANCE = 400;
 const CAMERA_CHANGE_EPSILON = 0.05;
+
+const GESTURE_ORBIT_SPEED = 2.4;
+const GESTURE_ZOOM_SPEED = 2.2;
+const GESTURE_PAN_SPEED = 0.9;
+const GESTURE_MIN_CAMERA_DISTANCE = 30;
+const GESTURE_MAX_CAMERA_DISTANCE = 1600;
 
 const buildNodeLabelSprite = (
   node: { id: string; title?: string },
@@ -502,7 +508,6 @@ const KeywordList: React.FC<{ pages: Page[] }> = ({ pages }) => {
 const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) => {
   const navigate = useNavigate();
   const [graphSize, setGraphSize] = useState({ width: window.innerWidth, height: window.innerHeight });
-  const [gestureSelectedNodeId, setGestureSelectedNodeId] = useState<string | null>(null);
   useEffect(() => {
     const updateSize = () => {
       setGraphSize({ width: window.innerWidth, height: window.innerHeight });
@@ -516,14 +521,10 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     () => buildDegreeMapFromLinks(graph.edges as Array<{ source: any; target: any }>),
     [graph.edges],
   );
-  const fullGraphData = useMemo(
-    () => ({ nodes: graph.nodes, links: graph.edges }),
-    [graph.nodes, graph.edges],
-  );
 
   const fullGraphRef = useRef<any>(null);
   const fullLabelMapRef = useRef<Map<string, SpriteText>>(new Map());
-  const projectionRef = useRef(new THREE.Vector3());
+  const cameraLookAtRef = useRef(new THREE.Vector3(0, 0, 0));
 
   useEffect(() => {
     fullLabelMapRef.current.clear();
@@ -540,90 +541,120 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
     graph.nodes as Array<{ id: string; x?: number; y?: number; z?: number }>,
   );
 
-  useEffect(() => {
+  const getCameraAndLookAt = () => {
     const graphInstance = fullGraphRef.current;
-    const renderer = graphInstance?.renderer?.();
-    if (!renderer) return;
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25);
-    renderer.setPixelRatio(pixelRatio);
-  }, []);
+    const camera = graphInstance?.camera?.() as THREE.PerspectiveCamera | undefined;
+    if (!camera) return null;
 
-  const getNodeAtScreenPoint = useCallback(
-    (screenX: number, screenY: number) => {
-      const graphInstance = fullGraphRef.current;
-      const camera = graphInstance?.camera?.();
-      if (!camera) return null;
-
-      let nearestNode: any | null = null;
-      let nearestDistance = Number.POSITIVE_INFINITY;
-      const maxDistancePx = 24;
-      const vector = projectionRef.current;
-
-      for (const node of graph.nodes as Array<{
-        id: string;
-        slug?: string;
-        title?: string;
-        x?: number;
-        y?: number;
-        z?: number;
-      }>) {
-        if (typeof node.x !== "number" || typeof node.y !== "number" || typeof node.z !== "number") continue;
-        vector.set(node.x, node.y, node.z).project(camera);
-        if (vector.z < -1 || vector.z > 1) continue;
-
-        const px = (vector.x * 0.5 + 0.5) * graphSize.width;
-        const py = (-vector.y * 0.5 + 0.5) * graphSize.height;
-        const d = Math.hypot(px - screenX, py - screenY);
-        if (d > maxDistancePx || d >= nearestDistance) continue;
-        if (!isNodeInteractiveByDistance(fullGraphRef.current, node)) continue;
-        nearestDistance = d;
-        nearestNode = node;
-      }
-
-      return nearestNode;
-    },
-    [graph.nodes, graphSize.height, graphSize.width],
-  );
-
-  const openNodeFromGesture = useCallback(
-    (node: any) => {
-      if (!node || !isNodeInteractiveByDistance(fullGraphRef.current, node)) return;
-      const path = getNodeRoutePath(node);
-      if (!path) return;
-      navigate(path);
-    },
-    [navigate],
-  );
-
-  const recenterGraphCamera = useCallback(() => {
-    const graphInstance = fullGraphRef.current;
-    const camera = graphInstance?.camera?.();
-    if (!graphInstance || !camera) return;
-
-    let sumX = 0;
-    let sumY = 0;
-    let sumZ = 0;
-    let count = 0;
-    for (const node of graph.nodes as Array<{ x?: number; y?: number; z?: number }>) {
-      if (typeof node.x !== "number" || typeof node.y !== "number" || typeof node.z !== "number") continue;
-      sumX += node.x;
-      sumY += node.y;
-      sumZ += node.z;
-      count += 1;
+    const controls = graphInstance?.controls?.() as any;
+    const target = controls?.target;
+    if (target && typeof target.x === "number" && typeof target.y === "number" && typeof target.z === "number") {
+      cameraLookAtRef.current.set(target.x, target.y, target.z);
     }
-    const center = new THREE.Vector3(count ? sumX / count : 0, count ? sumY / count : 0, count ? sumZ / count : 0);
-    const cameraPos = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z);
-    const offset = cameraPos.sub(center);
-    if (offset.lengthSq() < 1e-6) offset.set(0, 0, 1);
-    offset.setLength(Math.max(220, offset.length()));
-    const next = center.clone().add(offset);
+
+    return {
+      camera,
+      lookAt: cameraLookAtRef.current.clone(),
+    };
+  };
+
+  const applyCameraState = (cameraPosition: THREE.Vector3, lookAt: THREE.Vector3) => {
+    const graphInstance = fullGraphRef.current;
+    if (!graphInstance?.cameraPosition) return;
 
     graphInstance.cameraPosition(
-      { x: next.x, y: next.y, z: next.z },
-      { x: center.x, y: center.y, z: center.z },
-      650,
+      { x: cameraPosition.x, y: cameraPosition.y, z: cameraPosition.z },
+      { x: lookAt.x, y: lookAt.y, z: lookAt.z },
+      0,
     );
-  }, [graph.nodes]);
+
+    cameraLookAtRef.current.copy(lookAt);
+
+    const controls = graphInstance?.controls?.() as any;
+    if (controls?.target?.set) {
+      controls.target.set(lookAt.x, lookAt.y, lookAt.z);
+      if (typeof controls.update === "function") {
+        controls.update();
+      }
+    }
+  };
+
+  const orbitCameraByGesture = (dx: number, dy: number) => {
+    if (!dx && !dy) return;
+    const current = getCameraAndLookAt();
+    if (!current) return;
+
+    const offset = current.camera.position.clone().sub(current.lookAt);
+    const radius = Math.max(offset.length(), GESTURE_MIN_CAMERA_DISTANCE);
+
+    const spherical = new THREE.Spherical().setFromVector3(offset);
+    spherical.theta -= dx * GESTURE_ORBIT_SPEED;
+    spherical.phi += dy * GESTURE_ORBIT_SPEED;
+    spherical.makeSafe();
+
+    const nextOffset = new THREE.Vector3().setFromSpherical(spherical).setLength(radius);
+    const nextCameraPosition = current.lookAt.clone().add(nextOffset);
+    applyCameraState(nextCameraPosition, current.lookAt);
+  };
+
+  const zoomCameraByGesture = (zoomDelta: number) => {
+    if (!zoomDelta) return;
+    const current = getCameraAndLookAt();
+    if (!current) return;
+
+    const offset = current.camera.position.clone().sub(current.lookAt);
+    if (offset.lengthSq() === 0) return;
+
+    const nextDistance = THREE.MathUtils.clamp(
+      offset.length() * (1 + zoomDelta * GESTURE_ZOOM_SPEED),
+      GESTURE_MIN_CAMERA_DISTANCE,
+      GESTURE_MAX_CAMERA_DISTANCE,
+    );
+
+    const nextCameraPosition = current.lookAt.clone().add(offset.normalize().multiplyScalar(nextDistance));
+    applyCameraState(nextCameraPosition, current.lookAt);
+  };
+
+  const panCameraByGesture = (dx: number, dy: number) => {
+    if (!dx && !dy) return;
+    const current = getCameraAndLookAt();
+    if (!current) return;
+
+    const viewDirection = current.lookAt.clone().sub(current.camera.position);
+    const viewDistance = Math.max(viewDirection.length(), 1);
+    const forward = viewDirection.normalize();
+
+    let right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0, 1, 0));
+    if (right.lengthSq() < 1e-6) {
+      right = new THREE.Vector3(1, 0, 0);
+    }
+    right.normalize();
+
+    const up = new THREE.Vector3().crossVectors(right, forward).normalize();
+    const panScale = Math.max(1, viewDistance * GESTURE_PAN_SPEED);
+
+    const offset = right.multiplyScalar(-dx * panScale).add(up.multiplyScalar(dy * panScale));
+    const nextCameraPosition = current.camera.position.clone().add(offset);
+    const nextLookAt = current.lookAt.clone().add(offset);
+
+    applyCameraState(nextCameraPosition, nextLookAt);
+  };
+
+  const handleGestureControl = (event: GestureControlEvent) => {
+    if (event.mode === "orbit") {
+      orbitCameraByGesture(event.deltaX ?? 0, event.deltaY ?? 0);
+      return;
+    }
+
+    if (event.mode === "zoom") {
+      zoomCameraByGesture(event.zoomDelta ?? 0);
+      return;
+    }
+
+    if (event.mode === "pan") {
+      panCameraByGesture(event.deltaX ?? 0, event.deltaY ?? 0);
+    }
+  };
 
   return (
     <div className="page graph-page">
@@ -631,7 +662,7 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
       <div className="graph graph-fullscreen">
         <ForceGraph3D
           ref={fullGraphRef}
-          graphData={fullGraphData}
+          graphData={{ nodes: graph.nodes, links: graph.edges }}
           nodeId="id"
           nodeLabel={(n: any) => n.title}
           nodeThreeObject={(n: any) =>
@@ -656,28 +687,11 @@ const GraphPage: React.FC<{ graph: Graph; pages: Page[] }> = ({ graph, pages }) 
           width={graphSize.width}
           height={graphSize.height}
           backgroundColor="#fff"
-          rendererConfig={{ antialias: false, powerPreference: "high-performance" }}
-          cooldownTicks={80}
-          warmupTicks={30}
-          d3AlphaDecay={0.08}
-          d3VelocityDecay={0.5}
-          enableNodeDrag={false}
-          showNavInfo={false}
           linkColor={() => "#777"}
-          nodeColor={(node: any) => {
-            if (node.id === gestureSelectedNodeId) return "#0f766e";
-            return "#000";
-          }}
+          nodeColor={() => "#000"}
         />
       </div>
-      <HandGestureOverlay
-        graphRef={fullGraphRef}
-        getNodeAtScreenPoint={getNodeAtScreenPoint}
-        onOpenNode={openNodeFromGesture}
-        onSelectNode={(node) => setGestureSelectedNodeId(node?.id ?? null)}
-        onRecenter={recenterGraphCamera}
-        selectedNodeId={gestureSelectedNodeId}
-      />
+      <HandGestureOverlay onControl={handleGestureControl} />
     </div>
   );
 };
