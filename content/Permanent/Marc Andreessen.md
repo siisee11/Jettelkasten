@@ -4,7 +4,6 @@ tags:
   - public
   - person
 created: '2023-03-23T05:59:58.000Z'
-updated: '2026-02-08T13:37:50.000Z'
+updated: '2026-02-28T05:02:54.000Z'
 ---
-
-[[../Permanent/a16z]]
+[[a16z]]
