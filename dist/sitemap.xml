@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://namjaeyoun.com/</loc>
-    <lastmod>2026-03-15T15:00:18.419Z</lastmod>
+    <lastmod>2026-03-19T15:00:17.807Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/about</loc>
-    <lastmod>2026-03-15T15:00:18.419Z</lastmod>
+    <lastmod>2026-03-19T15:00:17.807Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/graph</loc>
-    <lastmod>2026-03-15T15:00:18.419Z</lastmod>
+    <lastmod>2026-03-19T15:00:17.807Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/keywords</loc>
-    <lastmod>2026-03-15T15:00:18.419Z</lastmod>
+    <lastmod>2026-03-19T15:00:17.807Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/2023-01-01</loc>
@@ -637,6 +637,10 @@
     <lastmod>2026-03-02T09:10:29.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/parkinsons-law</loc>
+    <lastmod>2026-03-16T12:53:28.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/patrick-collison</loc>
     <lastmod>2026-02-09T00:26:13.000Z</lastmod>
   </url>
@@ -813,6 +817,10 @@
     <lastmod>2026-02-11T00:59:04.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/spec-%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%E1%84%85%E1%85%B3%E1%86%AF-%E1%84%81%E1%85%A1%E1%86%A9%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%89%E1%85%B3%E1%84%90%E1%85%A1%E1%84%90%E1%85%B3%E1%84%8B%E1%85%A5%E1%86%B8</loc>
+    <lastmod>2026-03-18T10:18:44.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/speech</loc>
     <lastmod>2026-02-08T13:34:32.000Z</lastmod>
   </url>
@@ -887,6 +895,10 @@
   <url>
     <loc>https://namjaeyoun.com/p/the-hard-thing</loc>
     <lastmod>2026-02-20T11:17:50.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://namjaeyoun.com/p/the-pareto-principle</loc>
+    <lastmod>2026-03-19T10:22:35.000Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/the-right-it</loc>
@@ -965,6 +977,10 @@
     <lastmod>2026-02-08T08:06:10.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/what-the-loop</loc>
+    <lastmod>2026-03-19T10:32:12.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/why-comfort-will-ruin-your-life-%E1%84%87%E1%85%B5%E1%86%AF-%E1%84%8B%E1%85%A6%E1%86%A8%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%E1%84%85%E1%85%A9%E1%86%B7-bill-eckstrom</loc>
     <lastmod>2026-02-09T07:04:00.000Z</lastmod>
   </url>
@@ -1034,7 +1050,7 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/%E1%84%82%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB-4%E1%84%89%E1%85%B5%E1%84%80%E1%85%A1%E1%86%AB%E1%84%86%E1%85%A1%E1%86%AB-%E1%84%8B%E1%85%B5%E1%86%AF%E1%84%92%E1%85%A1%E1%86%AB%E1%84%83%E1%85%A1</loc>
-    <lastmod>2026-03-14T12:33:56.000Z</lastmod>
+    <lastmod>2026-03-17T10:31:43.000Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/%E1%84%82%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%90%E1%85%AE%E1%84%8C%E1%85%A1%E1%84%85%E1%85%A9-30%E1%84%82%E1%85%A7%E1%86%AB%E1%84%8B%E1%85%B3%E1%86%AF-%E1%84%87%E1%85%A5%E1%86%AF%E1%84%8B%E1%85%A5%E1%86%BB%E1%84%83%E1%85%A1</loc>
@@ -1326,6 +1342,6 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/posts</loc>
-    <lastmod>2026-03-15T15:00:18.419Z</lastmod>
+    <lastmod>2026-03-19T15:00:17.807Z</lastmod>
   </url>
 </urlset>
