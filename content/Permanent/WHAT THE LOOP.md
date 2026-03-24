@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2026-03-19T10:22:35.000Z'
-updated: '2026-03-19T10:32:12.000Z'
+updated: '2026-03-22T07:22:15.000Z'
 ---
 [[engineering]]
 
@@ -16,5 +16,8 @@ updated: '2026-03-19T10:32:12.000Z'
 
 처음에 ralph loop의 개념을 들었을때는 그냥 while문 돌리는 게 뭐가 대단한거라는 생각을 했다. 하지만 ralph loop를 구현해서 써보고, harness engineering도 하면서 깨달은 것은 가장 본질은 끝나기 전까지 끝나지 않는 루프 엔진이라는 것이다.
 
+확장가능한 What The Loop(왓더버거 먹다가 지음)를 베이스로 설계하고 그 위에 Ralph나 기타 루프를 쌓아나가는 형태로 만들면 좋을것 같다.
 
+github repo:
+https://github.com/siisee11/what-the-loop.spec
 
