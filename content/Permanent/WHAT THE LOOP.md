@@ -2,7 +2,7 @@
 tags:
   - public
 created: '2026-03-19T10:22:35.000Z'
-updated: '2026-03-22T07:22:15.000Z'
+updated: '2026-03-25T05:33:58.000Z'
 ---
 [[engineering]]
 
@@ -21,3 +21,8 @@ updated: '2026-03-22T07:22:15.000Z'
 github repo:
 https://github.com/siisee11/what-the-loop.spec
 
+---
+
+p.s. 2026-03-25
+
+사람도 어쩌면 루프다. 죽을 때 까지 뭔가를 달성하려고 하루하루를 반복하지 않는가. 루피는 우주의 근본 원칙일지도...
