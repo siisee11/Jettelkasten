@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://namjaeyoun.com/</loc>
-    <lastmod>2026-03-28T15:00:15.266Z</lastmod>
+    <lastmod>2026-03-29T15:00:18.795Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/about</loc>
-    <lastmod>2026-03-28T15:00:15.266Z</lastmod>
+    <lastmod>2026-03-29T15:00:18.795Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/graph</loc>
-    <lastmod>2026-03-28T15:00:15.266Z</lastmod>
+    <lastmod>2026-03-29T15:00:18.795Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/keywords</loc>
-    <lastmod>2026-03-28T15:00:15.266Z</lastmod>
+    <lastmod>2026-03-29T15:00:18.795Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/2023-01-01</loc>
@@ -837,6 +837,10 @@
     <lastmod>2026-02-11T00:59:04.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/spec-%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%E1%84%85%E1%85%B3%E1%86%AF-%E1%84%81%E1%85%A1%E1%86%A9%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%89%E1%85%B3%E1%84%90%E1%85%A1%E1%84%90%E1%85%B3%E1%84%8B%E1%85%A5%E1%86%B8</loc>
+    <lastmod>2026-03-18T10:18:44.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/speech</loc>
     <lastmod>2026-02-08T13:34:32.000Z</lastmod>
   </url>
@@ -1370,6 +1374,6 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/posts</loc>
-    <lastmod>2026-03-28T15:00:15.266Z</lastmod>
+    <lastmod>2026-03-29T15:00:18.795Z</lastmod>
   </url>
 </urlset>
