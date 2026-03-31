@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://namjaeyoun.com/</loc>
-    <lastmod>2026-03-30T15:00:24.726Z</lastmod>
+    <lastmod>2026-03-31T15:00:14.393Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/about</loc>
-    <lastmod>2026-03-30T15:00:24.726Z</lastmod>
+    <lastmod>2026-03-31T15:00:14.393Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/graph</loc>
-    <lastmod>2026-03-30T15:00:24.726Z</lastmod>
+    <lastmod>2026-03-31T15:00:14.393Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/keywords</loc>
-    <lastmod>2026-03-30T15:00:24.726Z</lastmod>
+    <lastmod>2026-03-31T15:00:14.393Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/2023-01-01</loc>
@@ -549,6 +549,10 @@
     <lastmod>2024-02-02T13:29:12.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/lsm-loopstatemachine</loc>
+    <lastmod>2026-03-31T12:23:03.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/marc-andreessen</loc>
     <lastmod>2026-02-28T05:02:54.000Z</lastmod>
   </url>
@@ -610,7 +614,7 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/my-ai-adoption-journey</loc>
-    <lastmod>2026-03-28T08:18:29.000Z</lastmod>
+    <lastmod>2026-03-31T12:06:31.000Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/nassim-nicholas-taleb</loc>
@@ -1374,6 +1378,6 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/posts</loc>
-    <lastmod>2026-03-30T15:00:24.726Z</lastmod>
+    <lastmod>2026-03-31T15:00:14.393Z</lastmod>
   </url>
 </urlset>
