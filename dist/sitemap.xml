@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://namjaeyoun.com/</loc>
-    <lastmod>2026-04-29T15:00:11.673Z</lastmod>
+    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/about</loc>
-    <lastmod>2026-04-29T15:00:11.673Z</lastmod>
+    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/graph</loc>
-    <lastmod>2026-04-29T15:00:11.673Z</lastmod>
+    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/keywords</loc>
-    <lastmod>2026-04-29T15:00:11.673Z</lastmod>
+    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/2023-01-01</loc>
@@ -1133,6 +1133,10 @@
     <lastmod>2026-02-08T11:30:15.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/%E1%84%87%E1%85%A1%E1%86%AB%E1%84%83%E1%85%A9%E1%84%8E%E1%85%A6-%E1%84%85%E1%85%A6%E1%86%AF%E1%84%85%E1%85%B5</loc>
+    <lastmod>2026-04-30T00:27:04.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/%E1%84%87%E1%85%A1%E1%86%AB%E1%84%83%E1%85%B3%E1%84%89%E1%85%B5-%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%A9%E1%86%BC%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A2%E1%86%BC</loc>
     <lastmod>2026-02-24T07:05:43.000Z</lastmod>
   </url>
@@ -1154,7 +1158,7 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/%E1%84%89%E1%85%A1%E1%86%BC%E1%84%83%E1%85%A2%E1%84%8C%E1%85%A5%E1%86%A8-%E1%84%80%E1%85%A5%E1%84%8C%E1%85%B5</loc>
-    <lastmod>2026-02-26T13:50:05.000Z</lastmod>
+    <lastmod>2026-04-30T00:08:46.000Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/%E1%84%89%E1%85%A2%E1%86%BC%E1%84%80%E1%85%A1%E1%86%A8%E1%84%8B%E1%85%B4-%E1%84%8B%E1%85%AC%E1%84%8C%E1%85%AE%E1%84%92%E1%85%AA</loc>
@@ -1382,6 +1386,6 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/posts</loc>
-    <lastmod>2026-04-29T15:00:11.673Z</lastmod>
+    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
   </url>
 </urlset>
