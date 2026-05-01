@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://namjaeyoun.com/</loc>
-    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
+    <lastmod>2026-05-01T15:00:16.317Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/about</loc>
-    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
+    <lastmod>2026-05-01T15:00:16.317Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/graph</loc>
-    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
+    <lastmod>2026-05-01T15:00:16.317Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/keywords</loc>
-    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
+    <lastmod>2026-05-01T15:00:16.317Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/2023-01-01</loc>
@@ -67,6 +67,10 @@
   <url>
     <loc>https://namjaeyoun.com/p/adam-grant</loc>
     <lastmod>2026-02-08T12:15:25.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://namjaeyoun.com/p/agent-message</loc>
+    <lastmod>2026-05-01T08:12:14.000Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/agentgpt</loc>
@@ -255,6 +259,10 @@
   <url>
     <loc>https://namjaeyoun.com/p/death</loc>
     <lastmod>2026-02-10T06:28:34.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://namjaeyoun.com/p/deepseek-v4-paper</loc>
+    <lastmod>2026-05-01T07:02:48.000Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/depensive</loc>
@@ -1386,6 +1394,6 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/posts</loc>
-    <lastmod>2026-04-30T15:00:14.506Z</lastmod>
+    <lastmod>2026-05-01T15:00:16.317Z</lastmod>
   </url>
 </urlset>
