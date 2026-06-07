@@ -18,6 +18,8 @@ export default function HomeSidebar({ pages, className = "" }: { pages: Page[]; 
         <Link to="/graph">graph</Link>
         <Link to="/posts">posts</Link>
         <Link to="/keywords">keywords</Link>
+        <a href="https://monitor.namjaeyoun.com/">AI monitor</a>
+        <a href="https://asset.namjaeyoun.com/">Asset</a>
       </div>
       <div className="home-links" style={{ marginTop: 8 }}>
         {categoryPages.map((p) => (
