@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://namjaeyoun.com/</loc>
-    <lastmod>2026-07-08T10:53:03.693Z</lastmod>
+    <lastmod>2026-07-08T15:00:13.435Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/about</loc>
-    <lastmod>2026-07-08T10:53:03.693Z</lastmod>
+    <lastmod>2026-07-08T15:00:13.435Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/graph</loc>
-    <lastmod>2026-07-08T10:53:03.693Z</lastmod>
+    <lastmod>2026-07-08T15:00:13.435Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/keywords</loc>
-    <lastmod>2026-07-08T10:53:03.693Z</lastmod>
+    <lastmod>2026-07-08T15:00:13.435Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/2023-01-01</loc>
@@ -1441,7 +1441,11 @@
     <lastmod>2026-02-20T11:19:54.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/%ED%9E%88%EA%B0%80%EC%8B%9C%EB%85%B8-%EA%B2%8C%EC%9D%B4%EA%B3%A0</loc>
+    <lastmod>2026-07-08T11:02:56.619Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/posts</loc>
-    <lastmod>2026-07-08T10:53:03.693Z</lastmod>
+    <lastmod>2026-07-08T15:00:13.435Z</lastmod>
   </url>
 </urlset>
