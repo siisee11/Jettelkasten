@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://namjaeyoun.com/</loc>
-    <lastmod>2026-07-12T15:42:59.033Z</lastmod>
+    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/about</loc>
-    <lastmod>2026-07-12T15:42:59.033Z</lastmod>
+    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/graph</loc>
-    <lastmod>2026-07-12T15:42:59.033Z</lastmod>
+    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/keywords</loc>
-    <lastmod>2026-07-12T15:42:59.033Z</lastmod>
+    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/2023-01-01</loc>
@@ -1105,6 +1105,10 @@
     <lastmod>2026-05-20T23:30:56.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/%EB%82%98%EB%8A%94-%EC%9D%B4%EB%B2%88-%ED%88%AC%EC%9E%90%EC%97%90%EC%84%9C-%EB%AC%B4%EC%97%87%EC%9D%84-%EC%9E%98-%EB%AA%BB%ED%96%88%EB%8A%94%EA%B0%80</loc>
+    <lastmod>2026-07-16T23:41:11.804Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/%E1%84%82%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%90%E1%85%AE%E1%84%8C%E1%85%A1%E1%84%85%E1%85%A9-30%E1%84%82%E1%85%A7%E1%86%AB%E1%84%8B%E1%85%B3%E1%86%AF-%E1%84%87%E1%85%A5%E1%86%AF%E1%84%8B%E1%85%A5%E1%86%BB%E1%84%83%E1%85%A1</loc>
     <lastmod>2026-02-22T11:35:46.000Z</lastmod>
   </url>
@@ -1369,6 +1373,10 @@
     <lastmod>2026-02-21T14:03:29.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/%E1%84%8C%E1%85%B5%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%92%E1%85%A1%E1%86%A8%E1%84%8C%E1%85%A5%E1%86%A8-%E1%84%8B%E1%85%B1%E1%84%92%E1%85%A5%E1%86%B7%E1%84%80%E1%85%AA-%E1%84%89%E1%85%B5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%A8-%E1%84%80%E1%85%B3%E1%86%B8%E1%84%83%E1%85%B3%E1%86%BC</loc>
+    <lastmod>2026-07-24T15:41:41.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/%E1%84%8E%E1%85%A1%E1%86%B7%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A1%E1%84%83%E1%85%A1%E1%84%81%E1%85%B5</loc>
     <lastmod>2026-02-08T11:25:17.000Z</lastmod>
   </url>
@@ -1446,6 +1454,6 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/posts</loc>
-    <lastmod>2026-07-12T15:42:59.033Z</lastmod>
+    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
   </url>
 </urlset>
