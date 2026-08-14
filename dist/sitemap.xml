@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://namjaeyoun.com/</loc>
-    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
+    <lastmod>2026-08-14T02:17:25.824Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/about</loc>
-    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
+    <lastmod>2026-08-14T02:17:25.824Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/graph</loc>
-    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
+    <lastmod>2026-08-14T02:17:25.824Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/keywords</loc>
-    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
+    <lastmod>2026-08-14T02:17:25.824Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/2023-01-01</loc>
@@ -87,6 +87,10 @@
   <url>
     <loc>https://namjaeyoun.com/p/ai-%E1%84%80%E1%85%B5%E1%84%8B%E1%85%A5%E1%86%B8</loc>
     <lastmod>2026-02-08T07:54:04.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://namjaeyoun.com/p/ai-%EC%82%AC%EC%9A%A9%EC%9D%84-%EA%B7%B8%EB%A7%8C%EB%91%A1%EB%8B%88%EB%8B%A4</loc>
+    <lastmod>2026-08-13T16:22:24.119Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/ai-%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%83%E1%85%A5%E1%86%A8%E1%84%90%E1%85%B3</loc>
@@ -1109,6 +1113,10 @@
     <lastmod>2026-07-16T23:41:11.804Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/%EB%82%98%EB%8A%94-%EC%A7%81%EC%97%85%EC%9D%98-%EC%86%8C%EB%A9%B8%EC%9D%84-%EB%AA%A9%EA%B2%A9%ED%95%98%EA%B3%A0-%EC%9E%88%EB%8B%A4.-%EA%B7%BC%EB%8D%B0-%EB%82%B4-%EC%A7%81%EC%97%85%EC%9D%B8...</loc>
+    <lastmod>2026-08-02T14:02:52.472Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/%E1%84%82%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%90%E1%85%AE%E1%84%8C%E1%85%A1%E1%84%85%E1%85%A9-30%E1%84%82%E1%85%A7%E1%86%AB%E1%84%8B%E1%85%B3%E1%86%AF-%E1%84%87%E1%85%A5%E1%86%AF%E1%84%8B%E1%85%A5%E1%86%BB%E1%84%83%E1%85%A1</loc>
     <lastmod>2026-02-22T11:35:46.000Z</lastmod>
   </url>
@@ -1126,7 +1134,7 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/%E1%84%82%E1%85%A2%E1%84%87%E1%85%AE%E1%84%8C%E1%85%A1-%E1%84%86%E1%85%A2%E1%84%89%E1%85%AE</loc>
-    <lastmod>2026-05-20T16:12:14.000Z</lastmod>
+    <lastmod>2026-08-08T09:27:16.306Z</lastmod>
   </url>
   <url>
     <loc>https://namjaeyoun.com/p/%E1%84%83%E1%85%A2%E1%84%8E%E1%85%A1%E1%86%BC%E1%84%83%E1%85%A5%E1%87%81%E1%84%87%E1%85%A1%E1%86%B8</loc>
@@ -1309,6 +1317,10 @@
     <lastmod>2026-03-15T04:46:00.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/%EC%9A%95%EC%8B%AC%EC%9D%B4-%EA%B3%BC%ED%95%A0-%EB%95%8C</loc>
+    <lastmod>2026-07-29T15:28:27.417Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/%E1%84%8B%E1%85%AE%E1%84%82%E1%85%A1%E1%84%83%E1%85%A9%E1%86%BC</loc>
     <lastmod>2024-06-25T13:24:32.000Z</lastmod>
   </url>
@@ -1433,6 +1445,10 @@
     <lastmod>2024-02-02T03:02:17.000Z</lastmod>
   </url>
   <url>
+    <loc>https://namjaeyoun.com/p/%ED%8C%94%EB%9E%80%ED%8B%B0%EC%96%B4-%EA%B0%AD%EC%83%81</loc>
+    <lastmod>2026-08-04T13:58:21.787Z</lastmod>
+  </url>
+  <url>
     <loc>https://namjaeyoun.com/p/%E1%84%91%E1%85%A2%E1%86%A8%E1%84%90%E1%85%B3%E1%84%91%E1%85%A9%E1%86%A8%E1%84%92%E1%85%A2%E1%86%BC</loc>
     <lastmod>2026-02-08T11:31:32.000Z</lastmod>
   </url>
@@ -1454,6 +1470,6 @@
   </url>
   <url>
     <loc>https://namjaeyoun.com/posts</loc>
-    <lastmod>2026-07-25T02:28:22.413Z</lastmod>
+    <lastmod>2026-08-14T02:17:25.824Z</lastmod>
   </url>
 </urlset>
